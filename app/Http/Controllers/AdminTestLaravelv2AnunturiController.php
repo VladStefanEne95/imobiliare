@@ -47,7 +47,7 @@
   'label' => 'Titlu',
   'name' => 'titlu',
   'type' => 'text',
-  'validation' => 'required|min:3|max:255',
+  'validation' => 'required|min:1|max:255',
   'width' => 'col-sm-10',
 );
 			$this->form[] = array (
@@ -59,7 +59,7 @@
   'label' => 'Pret',
   'name' => 'pret',
   'type' => 'text',
-  'validation' => 'required|min:3|max:255',
+  'validation' => 'required|min:1|max:255',
   'width' => 'col-sm-10',
 );
 			$this->form[] = array (
@@ -71,7 +71,7 @@
   'label' => 'Structura De Rezistenta',
   'name' => 'structura_de_rezistenta',
   'type' => 'text',
-  'validation' => 'required|min:3|max:255',
+  'validation' => 'required|min:1|max:255',
   'width' => 'col-sm-10',
 );
 			$this->form[] = array (
@@ -83,7 +83,7 @@
   'label' => 'Nr Camere',
   'name' => 'nr_camere',
   'type' => 'text',
-  'validation' => 'required|min:3|max:255',
+  'validation' => 'required|min:1|max:255',
   'width' => 'col-sm-10',
 );
 			$this->form[] = array (
@@ -95,7 +95,7 @@
   'label' => 'Suprafata Utila',
   'name' => 'suprafata_utila',
   'type' => 'text',
-  'validation' => 'required|min:3|max:255',
+  'validation' => 'required|min:1|max:255',
   'width' => 'col-sm-10',
 );
 			$this->form[] = array (
@@ -107,7 +107,7 @@
   'label' => 'Suprafata Utila Totala',
   'name' => 'suprafata_utila_totala',
   'type' => 'text',
-  'validation' => 'required|min:3|max:255',
+  'validation' => 'required|min:1|max:255',
   'width' => 'col-sm-10',
 );
 			$this->form[] = array (
@@ -119,7 +119,7 @@
   'label' => 'Suprafata Construita',
   'name' => 'suprafata_construita',
   'type' => 'text',
-  'validation' => 'required|min:3|max:255',
+  'validation' => 'required|min:1|max:255',
   'width' => 'col-sm-10',
 );
 			$this->form[] = array (
@@ -131,7 +131,7 @@
   'label' => 'Regim Inaltime',
   'name' => 'regim_inaltime',
   'type' => 'text',
-  'validation' => 'required|min:3|max:255',
+  'validation' => 'required|min:1|max:255',
   'width' => 'col-sm-10',
 );
 			$this->form[] = array (
@@ -143,7 +143,7 @@
   'label' => 'Confort',
   'name' => 'confort',
   'type' => 'text',
-  'validation' => 'required|min:3|max:255',
+  'validation' => 'required|min:1|max:255',
   'width' => 'col-sm-10',
 );
 			$this->form[] = array (
@@ -155,7 +155,7 @@
   'label' => 'Etaje',
   'name' => 'etaje',
   'type' => 'text',
-  'validation' => 'required|min:3|max:255',
+  'validation' => 'required|min:1|max:255',
   'width' => 'col-sm-10',
 );
 			$this->form[] = array (
@@ -167,7 +167,7 @@
   'label' => 'Tip Imobil',
   'name' => 'tip_imobil',
   'type' => 'text',
-  'validation' => 'required|min:3|max:255',
+  'validation' => 'required|min:1|max:255',
   'width' => 'col-sm-10',
 );
 			$this->form[] = array (
@@ -179,7 +179,7 @@
   'label' => 'Locuri Parcare',
   'name' => 'locuri_parcare',
   'type' => 'text',
-  'validation' => 'required|min:3|max:255',
+  'validation' => 'required|min:1|max:255',
   'width' => 'col-sm-10',
 );
 			$this->form[] = array (
@@ -191,7 +191,7 @@
   'label' => 'Nr Garaje',
   'name' => 'nr_garaje',
   'type' => 'text',
-  'validation' => 'required|min:3|max:255',
+  'validation' => 'required|min:1|max:255',
   'width' => 'col-sm-10',
 );
 			$this->form[] = array (
@@ -203,7 +203,7 @@
   'label' => 'Nr Bai',
   'name' => 'nr_bai',
   'type' => 'text',
-  'validation' => 'required|min:3|max:255',
+  'validation' => 'required|min:1|max:255',
   'width' => 'col-sm-10',
 );
 			$this->form[] = array (
@@ -215,7 +215,7 @@
   'label' => 'Nr Balcoane',
   'name' => 'nr_balcoane',
   'type' => 'text',
-  'validation' => 'required|min:3|max:255',
+  'validation' => 'required|min:1|max:255',
   'width' => 'col-sm-10',
 );
 			$this->form[] = array (
@@ -227,7 +227,7 @@
   'label' => 'Nr Bucatarii',
   'name' => 'nr_bucatarii',
   'type' => 'text',
-  'validation' => 'required|min:3|max:255',
+  'validation' => 'required|min:1|max:255',
   'width' => 'col-sm-10',
 );
 			$this->form[] = array (
@@ -239,7 +239,7 @@
   'label' => 'Compartimentare',
   'name' => 'compartimentare',
   'type' => 'text',
-  'validation' => 'required|min:3|max:255',
+  'validation' => 'required|min:1|max:255',
   'width' => 'col-sm-10',
 );
 			$this->form[] = array (
@@ -251,7 +251,7 @@
   'label' => 'An Constructie',
   'name' => 'an_constructie',
   'type' => 'text',
-  'validation' => 'required|min:3|max:255',
+  'validation' => 'required|min:1|max:255',
   'width' => 'col-sm-10',
 );
 			# END FORM DO NOT REMOVE THIS LINE

@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/price/filter', 'FilterControler@display');
+Route::get('/price/filter', 'FilterControler@display');
+
 
 
 Auth::routes();
