@@ -14,11 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/vanzare-apartament', function () {
+    return view('welcome');
+});
+
 
 Route::get('/price/filter', 'FilterControler@display');
-Route::get('/price/filter', 'FilterControler@display');
 
-
+Route::get('/bs', function () {
+    return view('test_bs');
+});
 
 Auth::routes();
 

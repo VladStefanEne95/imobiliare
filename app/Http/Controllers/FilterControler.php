@@ -7,45 +7,16 @@ use Illuminate\Http\Request;
 class FilterControler extends Controller
 {
 
-    public function display_lower($var)
+    public function universal_filter($filtru , $val)
     {
-        $users = \DB::table('anunturi')->get();
-        $arr = array();
+        if ($filtru == 'lower')
+            $users = \DB::table('anunturi')->get()->where('pret','<',$val);
+        else if ($filtru == 'upper')
+            $users = \DB::table('anunturi')->get()->where('pret','>',$val);
+        else if ($filtru == 'equal')
+            $users = \DB::table('anunturi')->get()->where('nr_camere',$val);
 
-        foreach ($users as $user) {
-           if ($user->pret <= $var) {
-                $arr[] = $user;
-            }
-        }
-
-        return view('lista_anunturi',['users'=>$arr]);
-    }
-
-    public function display_bigger( $var)
-    {
-        $users = \DB::table('anunturi')->get();
-        $arr = array();
-
-
-        foreach ($users as $user) {
-            if ($user->pret >= $var) {
-                $arr[] = $user;
-            }
-        }
-        return view('lista_anunturi',['users'=>$arr]);
-    }
-
-    public function display_equal($var)
-    {
-        $users = \DB::table('anunturi')->get();
-        $arr = array();
-
-        foreach ($users as $user) {
-            if ($user->nr_camere == $var) {
-                $arr[] = $user;
-            }
-        }
-        return view('lista_anunturi',['users'=>$arr]);
+        return view('lista_anunturi',['users'=>$users]);
     }
 
     public function display(Request $request )
@@ -57,12 +28,6 @@ class FilterControler extends Controller
         if (isset ($filtru) == FALSE)
             return view('lista_anunturi');
 
-        if ($filtru == 'lower')
-           return $this->display_lower($valoare);
-        else  if ($filtru == 'bigger')
-            return $this->display_bigger($valoare);
-         else if ($filtru == 'equal')
-            return $this->display_equal($valoare);
-
+           return $this->universal_filter($filtru,$valoare);
     }
 }
