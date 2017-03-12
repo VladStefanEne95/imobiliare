@@ -90,13 +90,13 @@
 
                         <tr>
                             <td><img src="https://img3.imonet.ro/X8SP/8SP00H2IF84/apartament-de-vanzare-2-camere-bucuresti-aparatorii-patriei-74465148_277x208.jpg"
-                            alt="Apartament" style="width:304px;height:228px;"><br></td>
+                            alt="Apartament" style="width:154px;height:128px;"><br></td>
                         </tr>
                  <?php
                     echo "<tr>";
-                    echo "<td>numar camere:  ", $user->nr_camere , "<br><td>";
+                    echo "<td>numar camere:  ", $user->nr_camere , "<td>";
                     echo "</tr>";
-                    echo "<td>suprafata utila:  ", $user->suprafata_utila ,"mp", "<br></td>";
+                    echo "<td>suprafata utila:  ", $user->suprafata_utila ,"mp", "</td>";
                     echo "<tr>";
             ?>
     </table></td>
@@ -122,7 +122,7 @@
                 echo $user->titlu,"<br>";
                 echo "numar camere:  ", $user->nr_camere , "<br>";
                 echo "suprafata utila:  ", $user->suprafata_utila ,"mp", "<br>";
-                $link_apartament = "http://127.0.0.1:8000/".$user->titlu;
+                $link_apartament = "http://127.0.0.1:8000/anunt/".$user->titlu;
                 echo '<a href="' . $link_apartament . '"class="btn btn-success">Detalii</a>';
                 ?>
                     <div class = "btn-group">
