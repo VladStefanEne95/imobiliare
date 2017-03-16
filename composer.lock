@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f29bf9981cc40252b5527f12829597e4",
+    "content-hash": "a3154c3d61133c0466090f38d17600de",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -56,16 +56,16 @@
         },
         {
             "name": "crocodicstudio/crudbooster",
-            "version": "v5.3.1.9",
+            "version": "v5.3.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/crocodic-studio/crudbooster.git",
-                "reference": "a5c883ddc02aa6b83803b27167d54726604087f1"
+                "reference": "bc667a0da912f0c79ea0d005e87b87738464bed1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/crocodic-studio/crudbooster/zipball/a5c883ddc02aa6b83803b27167d54726604087f1",
-                "reference": "a5c883ddc02aa6b83803b27167d54726604087f1",
+                "url": "https://api.github.com/repos/crocodic-studio/crudbooster/zipball/bc667a0da912f0c79ea0d005e87b87738464bed1",
+                "reference": "bc667a0da912f0c79ea0d005e87b87738464bed1",
                 "shasum": ""
             },
             "require": {
@@ -99,7 +99,7 @@
                 "generator",
                 "laravel"
             ],
-            "time": "2017-02-28T15:52:58+00:00"
+            "time": "2017-03-13T12:48:48+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",

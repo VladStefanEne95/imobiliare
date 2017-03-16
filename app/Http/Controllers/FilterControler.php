@@ -9,14 +9,22 @@ class FilterControler extends Controller
 
     public function universal_filter($filtru , $val)
     {
-        if ($filtru == 'lower')
-            $users = \DB::table('anunturi')->get()->where('pret','<',$val);
-        else if ($filtru == 'upper')
-            $users = \DB::table('anunturi')->get()->where('pret','>',$val);
-        else if ($filtru == 'equal')
-            $users = \DB::table('anunturi')->get()->where('nr_camere',$val);
+        if ($filtru == 'all')
+            $users = \DB::table('anunturi')->get();
+        else if ($filtru == 'c1')
+            $users = \DB::table('anunturi')->get()->where('nr_camere',1);
+        else if ($filtru == 'c2')
+            $users = \DB::table('anunturi')->get()->where('nr_camere',2);
+        else if ($filtru == 'c3')
+            $users = \DB::table('anunturi')->get()->where('nr_camere',3);
+        else if ($filtru == 'c4')
+            $users = \DB::table('anunturi')->get()->where('nr_camere',4);
+        else
+            $users = \DB::table('anunturi')->get();
 
-        return view('lista_anunturi',['users'=>$users]);
+
+
+        return view('lista_anunturi')->with(['users'=>$users,'link'=>$filtru]);
     }
 
     public function display(Request $request )

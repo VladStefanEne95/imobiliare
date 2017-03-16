@@ -1,7 +1,25 @@
 <!DOCTYPE html>
-@extends("crudbooster::admin_template")
-<>
 <head>
+
+    <?php 
+    function parseC($link){
+        $aux = strpos($link,'c');
+        if ($aux > -1){
+            $aux2 = substr($link, $aux, $aux + 2);
+            $ret =  str_replace($aux2, "", $link);
+            return $ret;
+        }
+    }
+    function parseP($link){
+        $aux = strpos($link,'p');
+        if ($aux > -1){
+            $aux2 = substr($link, $aux, $aux + 2);
+            $ret =  str_replace($aux2, "", $link);
+            return $ret;
+        }
+    }
+  ?>
+
     <title>Lista anunturi</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,8 +29,6 @@
 </head>
 
 <body>
-
-@section("content")
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -45,47 +61,93 @@
         </div>
     </nav>
     <style>
-
-        td
+        .primul td
         {
             padding:15px 15px 0 15px;
         }
 
-        tr.border {
-            border-style: solid;
-            border-width: medium;
+         .second td
+        {
+            padding:15px 0 0 15px;
         }
+
+      
         img{
             height: 200px;
             width: 500px;
         }
+        .div1 {
+            float:left;
+          
+        }
+        .div2 {
+           
+            float:right;
+        }
     </style>
-
+<div class="container">
+<section >
+ 
 <form>
-    filtru:<br>
-    <input type="text" name="filtru"><br>
-    valoare:<br>
-    <input type="text" name="valoare"><br>
-    <br><br>
-    <input type="submit" value="Submit">
-</form>
+  <div class="form-inline">
+    <input type="text" name ="filtru" class="form-control" size="85" placeholder="Cauta">
+    <button type="submit" class="btn btn-default">Go</button>
+  </div>
+  </form>
+<table>
+<tr>
+<td>
+  <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">Numar Camere
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+ 
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , c) > -1) echo parseC($link)."c1"; else echo $link."c1"; ?>">garsoniera</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , c) > -1) echo parseC($link)."c2"; else echo $link."c2"; ?>">2 camere</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , c) > -1) echo parseC($link)."c3"; else echo $link."c3"; ?>">3 camere</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , c) > -1) echo parseC($link)."c4"; else echo $link."c4"; ?>">4 camere</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , c) > -1) echo parseC($link)."c5"; else echo $link."c5"; ?>">5 camere</a></li>
+  </ul>
+</div>
+</td>
+<td>
 
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">Pret Vanzare
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+ 
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , p) > -1) echo parseP($link)."p1"; else echo $link."p1"; ?>">max 20000</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , p) > -1) echo parseP($link)."p2"; else echo $link."p2"; ?>">20000-40000</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , p) > -1) echo parseP($link)."p3"; else echo $link."p3"; ?>">40000-60000</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , p) > -1) echo parseP($link)."p4"; else echo $link."p4"; ?>">60000-80000</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , p) > -1) echo parseP($link)."p5"; else echo $link."p5"; ?>">80000-100000</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , p) > -1) echo parseP($link)."p6"; else echo $link."p6"; ?>">100000-150000</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , p) > -1) echo parseP($link)."p7"; else echo $link."p7"; ?>">150000-300000</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , p) > -1) echo parseP($link)."p8"; else echo $link."p8"; ?>">300000-600000</a></li>
+  </ul>
+</div>
+</td>
+</tr>
+</table>
+</section>
 
+<section class ="content-section">
     <table><tr>
 
     <?php
         if (isset ($users) == TRUE){
             $i = 0;
-
             foreach ($users as $user){
                 if($i>2)
                     break;
                 $i++;
                 ?>
                 <td>
-                    <table>
+                    <table class="primul">
                         <tr>
                             <?php echo" <td>$user->titlu</td>"; ?>
+
                         </tr>
 
                         <tr>
@@ -98,44 +160,62 @@
                     echo "</tr>";
                     echo "<td>suprafata utila:  ", $user->suprafata_utila ,"mp", "</td>";
                     echo "<tr>";
-            ?>
+                  ?>
     </table></td>
         <?php
          }
         }
     ?>
         </tr></table>
-<table>
+<table class="second">
 
     <?php
         if (isset ($users) == TRUE){
-        foreach ($users as $user){?>
+             $j = 1;
+            $nr_tel =array();
+        foreach ($users as $user){
+          $nr_tel[$j] = $user->telefon;
+          $j++; ?>
         <tr>
-            <td>
+            <td ><div class="col-md-3">
                 <img src="https://img3.imonet.ro/X8SP/8SP00H2IF84/apartament-de-vanzare-2-camere-bucuresti-aparatorii-patriei-74465148_277x208.jpg"
                      alt="Apartament" style="width:304px;height:228px;"><br>
-
+            </div>
             </td>
 
             <td>
+                 <td width="600"><div class="col-md-11">
                 <?php
-                echo $user->titlu,"<br>";
-                echo "numar camere:  ", $user->nr_camere , "<br>";
-                echo "suprafata utila:  ", $user->suprafata_utila ,"mp", "<br>";
+                echo "<h3>", $user->titlu,"<br>","<small>"," " ,$user->oras," " ,$user->zona,"</small>","</h3>", "<br>";?>
+                <div class="btn-group" >
+                    <?php
+                    echo "<button type='button' class='btn btn-primary btn-sm'>$user->nr_camere camere</button>";
+                    echo "<button type='button' class='btn btn-primary btn-sm'>$user->suprafata_utila  MP</button>";
+                    echo "<button type='button' class='btn btn-primary btn-sm'>Etaje $user->etaje/$user->regim_inaltime  </button>";
+                    echo "<button type='button' class='btn btn-primary btn-sm'>Bloc $user->tip_bloc </button>";
+
+                    ?>
+                </div><br><br>
+
+                 <div class ="div1 col-md-6">
+                <?php
+                         echo "<h2>", $user->pret ,"<small>"," EUR","</small>","<h2>";
+                ?>
+                </div>
+              
+                 <div class="div2 col-md-">
+                 <br>
+                <?php
+
                 $link_apartament = "http://127.0.0.1:8000/anunt/".$user->titlu;
                 echo '<a href="' . $link_apartament . '"class="btn btn-success">Detalii</a>';
+                $nr_tel_id ='test'.$user->id;
+
+                echo "<button id=$nr_tel_id type='button' class='btn btn-info telefon'>Numar telefon</button>";
                 ?>
-                    <div class = "btn-group">
-
-                        <button type = "button" class = "btn btn-default dropdown-toggle" data-toggle = "dropdown">
-                            Numar telefon
-                            <span class = "caret"></span>
-                        </button>
-
-                        <ul class = "dropdown-menu" role = "menu">
-                            <li><a href = "#">073213123</a></li>
-                        </ul>
-                    </div>
+                        
+                       </div>
+                 </div>
             </td>
         </tr>
         <tr></tr>
@@ -145,7 +225,20 @@
         }
         ?>
 </table>
-@endsection
+    <script>
+        $(document).ready(function(){
+        $(".telefon").click(function(){
+        var arrayFromPHP = <?php echo json_encode($nr_tel); ?>;
+        var nr_telefon;                    
+        var id_telefon =(event.target.id);
+        id_telefon = "#".concat(id_telefon);
+        index = id_telefon.replace(/\D/g,'');                 
+        $(id_telefon).replaceWith(arrayFromPHP[index]);
+        });
+        });
+  </script>
+</section>
+</div>
 </body>
 
 </html>
