@@ -9,6 +9,8 @@
             $ret =  str_replace($aux2, "", $link);
             return $ret;
         }
+        else
+            return $link;
     }
     function parseP($link){
         $aux = strpos($link,'p');
@@ -17,6 +19,39 @@
             $ret =  str_replace($aux2, "", $link);
             return $ret;
         }
+        else
+            return $link;
+    }
+
+    function return_camera($link){
+        if (strpos($link,'c1') > -1)
+            return "garsoniera";
+        else if (strpos($link,'c2') > -1)
+            return "doua camere";
+        else if (strpos($link,'c3') > -1)
+            return "trei camere";
+         else if (strpos($link,'c4') > -1)
+            return "patru camere";
+         else if (strpos($link,'c5') > -1)
+            return "cinci camere";
+    }
+    function return_pret($link){
+        if (strpos($link,'p1') > -1)
+            return "max 20.000";
+        else if (strpos($link,'p2') > -1)
+            return "20.000 - 40.000";
+        else if (strpos($link,'p3') > -1)
+            return "40.000 - 60.000";
+         else if (strpos($link,'p4') > -1)
+            return "60.000-80.000";
+         else if (strpos($link,'p5') > -1)
+            return "80.000-100.000";
+        else if (strpos($link,'p6') > -1)
+            return "100.000 - 150.000";
+         else if (strpos($link,'p7') > -1)
+            return "150.000 - 300.000";
+         else if (strpos($link,'p8') > -1)
+            return "300.000 - 600.000";
     }
   ?>
 
@@ -81,9 +116,12 @@
           
         }
         .div2 {
-           
             float:right;
         }
+        div.dropdown{
+            padding-right:0.3cm;
+        }
+
     </style>
 <div class="container">
 <section >
@@ -94,27 +132,47 @@
     <button type="submit" class="btn btn-default">Go</button>
   </div>
   </form>
+  <br>
 <table>
 <tr>
 <td>
   <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">Numar Camere
+  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><?php if (strpos($link,'c') > -1) echo return_camera($link); else echo "Numar camere"; 
+  ?>
   <span class="caret"></span></button>
+  <a href="http://127.0.0.1:8000/price/filter?filtru=<?php echo parseC($link)?>">
+  <?php 
+   if (strpos($link,'c') > -1)
+    echo "<button type='button' class='close' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+  ?>
+  </a>
+
   <ul class="dropdown-menu">
  
-    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , c) > -1) echo parseC($link)."c1"; else echo $link."c1"; ?>">garsoniera</a></li>
-    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , c) > -1) echo parseC($link)."c2"; else echo $link."c2"; ?>">2 camere</a></li>
-    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , c) > -1) echo parseC($link)."c3"; else echo $link."c3"; ?>">3 camere</a></li>
-    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , c) > -1) echo parseC($link)."c4"; else echo $link."c4"; ?>">4 camere</a></li>
-    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , c) > -1) echo parseC($link)."c5"; else echo $link."c5"; ?>">5 camere</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php echo parseC($link)."c1";  ?>">garsoniera</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php echo parseC($link)."c2";  ?>">2 camere</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php echo parseC($link)."c3";  ?>">3 camere</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php echo parseC($link)."c4";  ?>">4 camere</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php echo parseC($link)."c5"; ?>">5 camere</a></li>
+     <input type="text" name="firstname" size="1" placeholder ="De la">
+      <input type="text" name="firstname" size="1" placeholder ="la">
+      <button type="button" class="btn btn-default btn-sm submit">
+          <span class="glyphicon glyphicon-search"></span>
+        </button>
   </ul>
 </div>
 </td>
 <td>
 
 <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">Pret Vanzare
+  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><?php if (strpos($link,'p') > -1) echo return_pret($link); else echo "Pret vanzare"; ?>
   <span class="caret"></span></button>
+  <a href="http://127.0.0.1:8000/price/filter?filtru=<?php echo parseP($link)?>">
+  <?php 
+   if (strpos($link,'p') > -1)
+    echo "<button type='button' class='close' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+  ?>
+  </a>
   <ul class="dropdown-menu">
  
     <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , p) > -1) echo parseP($link)."p1"; else echo $link."p1"; ?>">max 20000</a></li>
@@ -125,11 +183,83 @@
     <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , p) > -1) echo parseP($link)."p6"; else echo $link."p6"; ?>">100000-150000</a></li>
     <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , p) > -1) echo parseP($link)."p7"; else echo $link."p7"; ?>">150000-300000</a></li>
     <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php if(strpos($link , p) > -1) echo parseP($link)."p8"; else echo $link."p8"; ?>">300000-600000</a></li>
+     <li>
+      <input type="text" name="firstname" size="1" placeholder ="De la">
+      <input type="text" name="firstname" size="1" placeholder ="la">
+      <button type="button" class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-search"></span>
+        </button>
+    </li>
+  </ul>
+</div>
+</td>
+
+<td>
+
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Etaj
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+ 
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=">Parter</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=">Etaj 1</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=">Etaj 3</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=">Etaj 3</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=">Etaj 4</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=">Demisol</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=">Mansarda</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=">Ultimele 2 etaje</a></li>
+     <li>
+      <input type="text" name="firstname" size="1" placeholder ="De la">
+      <input type="text" name="firstname" size="1" placeholder ="la">
+      <button type="button" class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-search"></span>
+        </button>
+    </li>
+  </ul>
+</div>
+</td>
+
+<td>
+
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Suprafata utila
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+ 
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=">max 30 mp</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=">30 - 60 mp</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=">60 - 90 mp</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=">90 - 140 mp</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=">140 - 200 mp</a></li>
+    <li><a href="http://127.0.0.1:8000/price/filter?filtru=">200 500 mp</a></li>
+     <li>
+      <input type="text" name="firstname" size="1" placeholder ="De la">
+      <input type="text" name="firstname" size="1" placeholder ="la">
+      <button type="button" class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-search"></span>
+        </button>
+    </li>
+  </ul>
+</div>
+</td>
+<td>
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Mai multe
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+ 
+    <li>
+       
+
+    </li>
+   
   </ul>
 </div>
 </td>
 </tr>
 </table>
+
 </section>
 
 <section class ="content-section">
@@ -147,7 +277,6 @@
                     <table class="primul">
                         <tr>
                             <?php echo" <td>$user->titlu</td>"; ?>
-
                         </tr>
 
                         <tr>
@@ -227,15 +356,17 @@
 </table>
     <script>
         $(document).ready(function(){
-        $(".telefon").click(function(){
-        var arrayFromPHP = <?php echo json_encode($nr_tel); ?>;
-        var nr_telefon;                    
-        var id_telefon =(event.target.id);
-        id_telefon = "#".concat(id_telefon);
-        index = id_telefon.replace(/\D/g,'');                 
-        $(id_telefon).replaceWith(arrayFromPHP[index]);
+            $(".telefon").click(function(){
+                var arrayFromPHP = <?php echo json_encode($nr_tel); ?>;
+                var nr_telefon;                    
+                var id_telefon =(event.target.id);
+                id_telefon = "#".concat(id_telefon);
+                index = id_telefon.replace(/\D/g,'');                 
+                $(id_telefon).replaceWith(arrayFromPHP[index]);
+            });
         });
-        });
+
+
   </script>
 </section>
 </div>
