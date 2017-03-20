@@ -20,6 +20,10 @@ Route::get('/anunt/{anunt}', function ($anunt) {
     return view('anunt',['anunt'=>$date]);
 });
 
+Route::get('/adauga-anunt', function () {
+    return view('adauga-anunt');
+});
+
 
 Route::get('/price/filter', 'FilterControler@display');
 

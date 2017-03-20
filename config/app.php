@@ -162,6 +162,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        'Collective\Html\HtmlServiceProvider',
 		
 
         /*
@@ -235,6 +236,8 @@ crocodicstudio\crudbooster\CRUDBoosterServiceProvider::class,
 'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 'Image' => Intervention\Image\Facades\Image::class,
 'CRUDBooster' => crocodicstudio\crudbooster\helpers\CRUDBooster::class,
+ 'Form' => 'Collective\Html\FormFacade',
+  'Html' => 'Collective\Html\HtmlFacade',
 
     ],
 
