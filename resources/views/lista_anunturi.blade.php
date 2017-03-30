@@ -154,8 +154,8 @@
                 <li><a href="http://127.0.0.1:8000/adauga-anunt">Adauga anunt</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="http://127.0.0.1:8000/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="http://127.0.0.1:8000/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         </div>
     </div>
@@ -219,12 +219,12 @@
 
                             <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php echo parseP($link)."p0"."p20000";  ?>">max 20000</a></li>
                             <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php  echo parseP($link)."p20000"."p40000";  ?>">20000-40000</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php  echo parseP($link)."p3"."p3";  ?>">40000-60000</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php  echo parseP($link)."p4"."p4";  ?>">60000-80000</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php  echo parseP($link)."p5"."p5";  ?>">80000-100000</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php  echo parseP($link)."p6"."p6";  ?>">100000-150000</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php  echo parseP($link)."p7"."p7";  ?>">150000-300000</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php  echo parseP($link)."p8"."p8";  ?>">300000-600000</a></li>
+                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php  echo parseP($link)."p40000"."p60000";  ?>">40000-60000</a></li>
+                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php  echo parseP($link)."p60000"."p80000";  ?>">60000-80000</a></li>
+                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php  echo parseP($link)."p80000"."p100000";  ?>">80000-100000</a></li>
+                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php  echo parseP($link)."p100000"."p150000";  ?>">100000-150000</a></li>
+                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php  echo parseP($link)."p150000"."p300000";  ?>">150000-300000</a></li>
+                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php  echo parseP($link)."300000"."600000";  ?>">300000-600000</a></li>
                             <form>
                                 <input type="text"  name="lowerPrice"  id="txt_input3" size="1" placeholder ="De la">
                                 <input type="text" name="higherPrice" id="txt_input4" size="1" placeholder ="la">
