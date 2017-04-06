@@ -151,13 +151,13 @@
 </form>
 
 <div class="container">
-<form action="upload.php" method="post" enctype="multipart/form-data">
+<form action="upload.php" method="get" enctype="multipart/form-data">
     Adauga poze:
     <input type="file" name="fileToUpload" id="fileToUpload">
 </form>
 </div>
 
-<form>
+<form method="post" action="/anunt-adaugat">
 <div class ="container apartament casa stealth" style="margin-top:20px;">
 Numar camere
 <div class="btn-secondary">
@@ -238,8 +238,8 @@ Numar camere
 <div class = "container teren stealth" style="margin-top:10px;">
   Tip teren<br>
  <select style="width:150px;" name="tipTeren" id="tipTeren">
-      <option value="Lux">Alege</option>
-      <option value="">Constructii</option>
+      <option value="Alege">Alege</option>
+      <option value="0">Constructii</option>
       <option value="1">Agricol</option>
       <option value="2">Padure</option>
       <option value="3">Livada</option>
@@ -335,6 +335,7 @@ Numar camere
         <input type="submit" class="btn btn-info btn-lg"  value="Continua">
       </div> 
     </div>
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
   </form>
 
 </div>

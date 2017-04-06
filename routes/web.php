@@ -17,13 +17,14 @@ Route::get('/', function () {
 Route::get('/anunt/{anunt}', function ($anunt) {
     $date = \DB::table('anunturi')->get()->where('titlu','vanzare-apartament')->first();
 
-    return view('anunt',['anunt'=>$date]);
+    return view('anunt',['anunt'=>$date[0]]);
 });
 
-Route::get('/adauga-anunt', function () {
-    return view('adauga-anunt');
-});
 
+
+Route::get('/adauga-anunt', 'AccessController@display');
+
+Route::post('/anunt-adaugat', 'AddAnounceController@display');
 
 Route::get('/price/filter', 'FilterControler@display');
 
@@ -35,6 +36,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('/plata/{id}', 'PaymentController@display');
+Route::get('/vp/{id}', 'PaymentController@check');
+Route::get('/edit/{id}', 'EditAnounceController@editAnounce');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
@@ -42,3 +47,11 @@ Route::get('/home', 'HomeController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+
+Route::get('sendemail',  'MailController@html_email');
+
+    
+
+
+
