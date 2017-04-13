@@ -68,6 +68,22 @@
      background:#DDD;
 }
 
+  .demo-droppable {
+    background: #08c;
+    color: #fff;
+    padding: 100px 0;
+    text-align: center;
+  }
+  .demo-droppable.dragover {
+    background: #00CC71;
+  }
+    
+      
+   .dropzone {
+      height: 160px;
+      width: 550px;
+    }
+
 </style>
  <title>Adauga anunt</title>
  <meta charset="utf-8">
@@ -75,6 +91,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.js"></script>
 </head>
 <body>
   <nav class="navbar navbar-inverse">
@@ -115,16 +133,16 @@
 <div class ="container" style="margin-top:60px">
 <div class="btn-secondary" >
   <label class="btn btn-default">
-    <input type="radio" name="options" id="optapt"  > Apartament
+    <input  form="saveForm" type="radio" name="options" id="optapt" value="apartament" > Apartament
   </label>
   <label class="btn btn-default">
-    <input type="radio" name="options" id="optcasa" > Casa
+    <input  form="saveForm" type="radio" name="options" id="optcasa" value="casa"> Casa
   </label>
   <label class="btn btn-default">
-    <input type="radio" name="options" id="optteren" > Teren
+    <input  form="saveForm" type="radio" name="options" id="optteren" value="teren"> Teren
   </label>
   <label class="btn btn-default">
-    <input type="radio" name="options" id="optcomercial" > Comercial
+    <input  form="saveForm" type="radio" name="options" id="optcomercial" > Comercial
   </label>
 </div>
 </div>
@@ -132,32 +150,110 @@
 <div class ="container" style="margin-top:50px">
 <div class="btn-secondary" data-toggle="buttons">
   <label class="btn btn-default">
-    <input type="radio" name="options" id="option1" autocomplete="off" checked> De vanzare
+    <input type="radio" name="tip-contract" id="option1" value="de-vanzare" checked> De vanzare
   </label>
   <label class="btn btn-default">
-    <input type="radio" name="options" id="option2" autocomplete="off"> De inchiriat
+    <input type="radio" name="tip-contract" id="option2" value="de-inchiriat"> De inchiriat
   </label>
   </div>
   </div>
 
 
-<form>
+
 <div class="container" style="margin-top:20px; margin-left:240px;">
   <div class="form-group col-md-6  ">
-    <label ></label>
-    <input type="text" class="form-control" id="titlu" placeholder="Titlu anunt">
+    <input form="saveForm" type="text" class="form-control" name="titlu" placeholder="Titlu anunt">
   </div> 
 </div>
-</form>
 
-<div class="container">
-<form action="upload.php" method="get" enctype="multipart/form-data">
-    Adauga poze:
-    <input type="file" name="fileToUpload" id="fileToUpload">
+
+
+
+
+
+
+<!--<div class = "container">
+<form action="/upload" method="POST" class="form-horizontal" role="form">
+  <div class="form-group">
+    <legend>Add product</legend>
+  </div>
+
+  <label for="title">Title</label>
+  <input type="text" name="title" id="input-title" class="form-control">
+
+  <label for="description">Description</label>
+  <input type="text" name="description" id="input-description" class="form-control">
+
+  <div class="dropzone dropzone-previews" id="my-awesome-dropzone"></div>
+
+  <div class="form-group">
+    <div class="col-sm-10 col-sm-offset-2">
+     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
 </form>
 </div>
 
-<form method="post" action="/anunt-adaugat">
+<form action="/upload" method="post" enctype="multipart/form-data">
+  Send these files:<br />
+  <input name="file[]" type="file" /><br />
+  <input name="file[]" type="file" /><br />
+  <input type="submit" value="Send files" />
+  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+</form>-->
+
+
+
+
+<div class="container">
+ <h3>Adauga imagini</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form action="/upload" class="dropzone" enctype="multipart/form-data" id="image-upload" method="post">
+        <div>    
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+// Dropzone.autoDiscover = false;
+
+//   jQuery(document).ready(function() {
+
+//     $("div#my-awesome-dropzone").dropzone({
+//       url: "/upload"
+//     });
+
+//   });
+   Dropzone.options.imageUpload = {
+         maxFilesize:8,
+          dictDefaultMessage: "Adauga imagini",
+         acceptedFiles: ".jpeg,.jpg,.png,.gif"
+     };
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<form id="saveForm" method="post" action="/anunt-adaugat">
 <div class ="container apartament casa stealth" style="margin-top:20px;">
 Numar camere
 <div class="btn-secondary">
@@ -292,8 +388,10 @@ Numar camere
     <label ></label>
     <input type="text" name="adresa"class="form-control" id="adresa" placeholder="Adresa">
     <div style="display:inline !important;">
-      <select   style="width:20%" name="id_localitate" id="localitate-js" onchange="jsFunction()"  data-size="6" class="form-control" ><optgroup label="Lista orase"><option value="13822" selected="selected">Bucuresti</option><option value="8112">Bragadiru</option><option value="8116">Buftea</option><option value="8123">Chitila</option><option value="8158">Magurele</option><option value="8172">Otopeni</option><option value="8173">Pantelimon</option><option value="8180">Popesti-Leordeni</option><option value="8206">Voluntari</option></optgroup><optgroup label="Comune / sate"><option value="8104">1 Decembrie</option><option value="8105">Afumati</option><option value="8106">Alunisu</option><option value="8107">Balaceanca</option><option value="8108">Balotesti</option><option value="8109">Balta Neagra</option><option value="8110">Balteni</option><option value="8111">Berceni</option><option value="8113">Branesti</option><option value="8114">Buciumeni</option><option value="8115">Buda</option><option value="8117">Burias</option><option value="8118">Caciulati</option><option value="8119">Caldararu</option><option value="8120">Catelu</option><option value="8121">Cernica</option><option value="8122">Chiajna</option><option value="8124">Ciofliceni</option><option value="8125">Ciolpani</option><option value="8126">Ciorogarla</option><option value="8127">Clinceni</option><option value="8128">Copaceni</option><option value="8129">Corbeanca</option><option value="8130">Cornetu</option><option value="8131">Cozieni</option><option value="8132">Creata</option><option value="8133">Cretesti</option><option value="8134">Cretuleasca</option><option value="8135">Darasti-Ilfov</option><option value="8136">Darvari</option><option value="8137">Dascalu</option><option value="8138">Dimieni</option><option value="8139">Dobroesti</option><option value="8140">Domnesti</option><option value="8141">Dragomiresti-Deal</option><option value="8142">Dragomiresti-Vale</option><option value="8143">Dudu</option><option value="8144">Dumbraveni</option><option value="8145">Dumitrana</option><option value="8146">Fundeni</option><option value="8147">Gagu</option><option value="8148">Ganeasa</option><option value="8149">Ghermanesti</option><option value="8150">Glina</option><option value="8151">Gradistea</option><option value="8152">Gruiu</option><option value="8153">Islaz</option><option value="8154">Izvorani</option><option value="8155">Jilava</option><option value="8156">Lipia</option><option value="8157">Luparia</option><option value="8159">Maineasca</option><option value="8160">Manolache</option><option value="8161">Merii Petchii</option><option value="8162">Micsunesti-Moara</option><option value="8163">Micsunestii Mari</option><option value="8164">Moara Domneasca</option><option value="8165">Moara Vlasiei</option><option value="8166">Mogosoaia</option><option value="8167">Nuci</option><option value="8168">Odaile</option><option value="8169">Olteni</option><option value="8170">Ordoreanu</option><option value="8171">Ostratu</option><option value="8174">Pasarea</option><option value="8175">Peris</option><option value="8176">Petrachioaia</option><option value="8177">Petresti</option><option value="8178">Piscu</option><option value="8179">Piteasca</option><option value="8181">Posta</option><option value="8182">Pruni</option><option value="8183">Rosu</option><option value="8184">Rudeni</option><option value="8185">Runcu</option><option value="8186">Saftica</option><option value="8187">Santu-Floresti</option><option value="8188">Silistea Snagovului</option><option value="8189">Sindrilita</option><option value="8190">Sintesti</option><option value="8191">Sitaru</option><option value="8192">Snagov</option><option value="8193">Stefanestii de Jos</option><option value="8194">Stefanestii de Sus</option><option value="8195">Surlari</option><option value="8196">Tamasi</option><option value="8197">Tancabesti</option><option value="8198">Tanganu</option><option value="8199">Teghes</option><option value="8200">Tunari</option><option value="8201">Vadu Anei</option><option value="8202">Vanatori</option><option value="8203">Varteju</option><option value="8204">Vidra</option><option value="8205">Vladiceasca</option><option value="8207">Zurbaua</option></optgroup></select>
-      <select class="form-control invizibil"  style="width:35%" name="id_zona" id="zona-js" autocomplete="off" data-size="5" data-dropup-auto="false" ><option value="776">1 Decembrie 1918</option><option value="804">1 Mai</option><option value="844">13 Septembrie</option><option value="1066">16 Februarie</option><option value="1155">23 August (Catelul)</option><option value="1153">Agronomie</option><option value="744">Alba Iulia</option><option value="1024">Alexandriei</option><option value="1078">Alexandru Obregia</option><option value="745">Amzei</option><option value="1467">Andronache</option><option value="1058">Antiaeriana</option><option value="746">Aparatorii Patriei</option><option value="1171">Apusului</option><option value="747">Arcul de Triumf</option><option value="748">Armeneasca</option><option value="750">Aviatiei</option><option value="749">Aviatorilor</option><option value="751">Baba Novac</option><option value="1081">Baicului</option><option value="752">Balta Alba</option><option value="754">Baneasa</option><option value="753">Banu Manta</option><option value="755">Barbu Vacarescu</option><option value="1064">Basarab</option><option value="756">Basarabia</option><option value="1102">Batistei</option><option value="1177">Bd. Gloriei</option><option value="1173">Bd. Laminorului</option><option value="757">Beller</option><option value="758">Berceni</option><option value="759">Brancoveanu</option><option value="1084">Brezoianu</option><option value="1149">Bucur Obor</option><option value="761">Bucurestii Noi</option><option value="762">Calea Calarasilor</option><option value="1095">Calea Plevnei</option><option value="763">Calea Victoriei</option><option value="1079">Camil Ressu</option><option value="765">Campia Libertatii</option><option value="1145">Candiano Popescu</option><option value="764">Cantemir</option><option value="1101">Capitale</option><option value="1176">Casin</option><option value="767">Centrul Civic</option><option value="768">Centrul Istoric</option><option value="1400">Centura Est</option><option value="1398">Centura Nord</option><option value="1399">Centura Sud</option><option value="1401">Centura Vest</option><option value="770">Chibrit</option><option value="1016">Chirigii</option><option value="1158">Chisinau</option><option value="1019">Chitila</option><option value="769">Cismigiu</option><option value="1065">Clabucet</option><option value="1166">Clucerului</option><option value="771">Colentina</option><option value="1179">Compozitorilor</option><option value="1184">Constructorilor</option><option value="1028">Cosbuc</option><option value="1080">Costin Georgian</option><option value="772">Cotroceni</option><option value="766">Crangasi</option><option value="1150">Crevedia</option><option value="1164">Cutitul de Argint</option><option value="773">Dacia</option><option value="774">Damaroaia</option><option value="775">Decebal</option><option value="1396">DN 1</option><option value="1397">DN 2</option><option value="1082">Doamna Ghica</option><option value="777">Domenii</option><option value="778">Dorobanti</option><option value="779">Dristor</option><option value="1104">Drumul Gazarului</option><option value="1059">Drumul Sarii</option><option value="780">Drumul Taberei</option><option value="781">Dudesti</option><option value="1021">Eminescu</option><option value="1103">Eroii Revolutiei</option><option value="782">Ferdinand</option><option value="783">Ferentari</option><option value="1165">Fizicienilor</option><option value="784">Floreasca</option><option value="785">Foisorul de Foc</option><option value="786">Fundeni</option><option value="1172">Gara de Est</option><option value="787">Gara de Nord</option><option value="788">Ghencea</option><option value="789">Giulesti</option><option value="1469">Giulesti Sarbi</option><option value="790">Giurgiului</option><option value="1034">Gorjului</option><option value="791">Gradina Icoanei</option><option value="792">Grivita</option><option value="1085">Grozavesti</option><option value="793">Herastrau</option><option value="1183">I.C. Bratianu</option><option value="1152">Iancu Nicolae</option><option value="794">Iancului</option><option value="1063">Industriilor</option><option value="1468">Ion Creanga</option><option value="1029">Jiului</option><option value="795">Kiseleff</option><option value="796">Kogalniceanu</option><option value="1031">Lacul Morii</option><option value="797">Lacul Tei</option><option value="798">Lahovari</option><option value="799">Libertatii</option><option value="800">Lipscani</option><option value="801">Liviu Rebreanu</option><option value="802">Lizeanu</option><option value="803">Lucretiu Patrascanu</option><option value="1027">Lujerului</option><option value="1098">Macaralei</option><option value="805">Magheru</option><option value="1017">Magurele</option><option value="806">Marasesti</option><option value="1161">Margeanului</option><option value="1162">Matei Voievod</option><option value="807">Metalurgiei</option><option value="808">Mihai Bravu</option><option value="809">Militari</option><option value="1157">Mitropolie</option><option value="1033">Moinesti</option><option value="1168">Morarilor</option><option value="810">Mosilor</option><option value="811">Muncii</option><option value="812">Natiunile Unite</option><option value="813">Nerva Traian</option><option value="1156">Nicolae Grigorescu</option><option value="814">Nordului</option><option value="815">Obor</option><option value="1160">Octavian Goga</option><option value="816">Oltenitei</option><option value="1093">Ozana</option><option value="822">P-ta Alba Iulia</option><option value="823">P-ta Amzei</option><option value="1070">P-ta Arsenalului</option><option value="1077">P-ta de Gros</option><option value="1099">P-ta Dorobanti</option><option value="824">P-ta Galati</option><option value="1061">P-ta Gorjului</option><option value="1083">P-ta Jose Rizal</option><option value="1060">P-ta Leul</option><option value="825">P-ta Muncii</option><option value="1069">P-ta Operei</option><option value="826">P-ta Presei Libere</option><option value="1074">P-ta Resita</option><option value="827">P-ta Romana</option><option value="828">P-ta Rosetti</option><option value="1072">P-ta Sfanta Vineri</option><option value="1071">P-ta Sfantul Gheorghe</option><option value="829">P-ta Sfantul Stefan</option><option value="1067">P-ta Sfintii Voievozi</option><option value="830">P-ta Unirii</option><option value="831">P-ta Universitatii</option><option value="832">P-ta Victoriei</option><option value="817">Pache Protopopescu</option><option value="1062">Pacii</option><option value="818">Pajura</option><option value="819">Panduri</option><option value="820">Pantelimon</option><option value="821">Parcul Carol</option><option value="1163">Parcul Circului</option><option value="1097">Petricani</option><option value="1148">Pieptanari</option><option value="833">Pipera</option><option value="1154">Plevnei</option><option value="1022">Politehnica</option><option value="834">Polona</option><option value="1096">Prelungirea Ferentari</option><option value="835">Prelungirea Ghencea</option><option value="836">Primaverii</option><option value="1076">Progresul</option><option value="837">Rahova</option><option value="838">Regie</option><option value="1146">Regina Elisabeta</option><option value="839">Romana</option><option value="840">Rosetti</option><option value="841">Sala Palatului</option><option value="1025">Salaj</option><option value="842">Salajan</option><option value="843">Sebastian</option><option value="845">Serban Voda</option><option value="1023">Sisesti</option><option value="1182">Socului</option><option value="846">Soseaua Nordului</option><option value="1147">Splaiul Independentei</option><option value="847">Splaiul Unirii</option><option value="848">Stefan cel Mare</option><option value="849">Stirbei Voda</option><option value="1018">Straulesti</option><option value="1075">Sura Mare</option><option value="1151">Take Ionescu</option><option value="850">Tei</option><option value="1159">Teiul Doamnei</option><option value="1100">Televiziune</option><option value="1026">Theodor Pallady</option><option value="1030">Timisoara</option><option value="851">Timpuri Noi</option><option value="852">Tineretului</option><option value="853">Titan</option><option value="854">Titulescu</option><option value="1170">Trafic Greu</option><option value="1055">Tudor Vladimirescu</option><option value="855">Turda</option><option value="856">Unirii</option><option value="857">Universitate</option><option value="1032">Uverturii</option><option value="859">Vacaresti</option><option value="1057">Valea Ialomitei</option><option value="1056">Valea Oltului</option><option value="1068">Vasile Parvan</option><option value="858">Vatra Luminoasa</option><option value="1035">Veteranilor</option><option value="860">Victoriei</option><option value="1020">Viilor</option><option value="1167">Virtutii</option><option value="861">Vitan</option><option value="862">Vitan Mall</option><option value="1180">Vitan-Barzesti</option><option value="1174">Vitanul Nou</option><option value="1073">Zetarilor</option><option value="9">Central</option><option value="3">Est</option><option value="14">Exterior Est</option><option value="12">Exterior Nord</option><option value="13">Exterior Sud</option><option value="15">Exterior Vest</option><option value="1">Nord</option><option value="6">Nord-Est</option><option value="8">Nord-Vest</option><option value="11">Periferie</option><option value="2">Sud</option><option value="5">Sud-Est</option><option value="7">Sud-Vest</option><option value="10">Ultracentral</option><option value="4">Vest</option></select>
+      <select   style="width:20%" name="oras" id="localitate-js" onchange="jsFunction()"  data-size="6" class="form-control" ><optgroup label="Lista orase"><option selected=selected>Bucuresti</option><option >Bragadiru</option><option>Buftea</option><option >Chitila</option><option >Magurele</option><option >Otopeni</option><option >Pantelimon</option><option >Popesti-Leordeni</option><option >Voluntari</option></optgroup><optgroup label=Comune / sate><option> Decembrie</option><option>Afumati</option><option>Alunisu</option><option>Balaceanca</option><option>Balotesti</option><option >Balta Neagra</option><option >Balteni</option><option >Berceni</option><option >Branesti</option><option >Buciumeni</option><option >Buda</option><option >Burias</option><option >Caciulati</option><option >Caldararu</option><option >Catelu</option><option >Cernica</option><option >Chiajna</option><option >Ciofliceni</option><option >Ciolpani</option><option >Ciorogarla</option><option >Clinceni</option><option >Copaceni</option><option >Corbeanca</option><option >Cornetu</option><option >Cozieni</option><option >Creata</option><option >Cretesti</option><option >Cretuleasca</option><option >Darasti-Ilfov</option><option >Darvari</option><option >Dascalu</option><option >Dimieni</option><option >Dobroesti</option><option >Domnesti</option><option >Dragomiresti-Deal</option><option >Dragomiresti-Vale</option><option >Dudu</option><option >Dumbraveni</option><option >Dumitrana</option><option >Fundeni</option><option >Gagu</option><option >Ganeasa</option><option >Ghermanesti</option><option >Glina</option><option >Gradistea</option><option >Gruiu</option><option >Islaz</option><option >Izvorani</option><option >Jilava</option><option >Lipia</option><option >Luparia</option><option >Maineasca</option><option >Manolache</option><option >Merii Petchii</option><option >Micsunesti-Moara</option><option >Micsunestii Mari</option><option >Moara Domneasca</option><option >Moara Vlasiei</option><option >Mogosoaia</option><option >Nuci</option><option >Odaile</option><option >Olteni</option><option >Ordoreanu</option><option >Ostratu</option><option >Pasarea</option><option >Peris</option><option >Petrachioaia</option><option >Petresti</option><option >Piscu</option><option >Piteasca</option><option >Posta</option><option >Pruni</option><option >Rosu</option><option >Rudeni</option><option >Runcu</option><option >Saftica</option><option >Santu-Floresti</option><option >Silistea Snagovului</option><option >Sindrilita</option><option >Sintesti</option><option >Sitaru</option><option >Snagov</option><option >Stefanestii de Jos</option><option >Stefanestii de Sus</option><option >Surlari</option><option >Tamasi</option><option >Tancabesti</option><option >Tanganu</option><option >Teghes</option><option >Tunari</option><option >Vadu Anei</option><option >Vanatori</option><option >Varteju</option><option >Vidra</option><option >Vladiceasca</option><option >Zurbaua</option></optgroup></select>
+
+      <select class="form-control invizibil"  style="width:35%" name="zona" id="zona-js" autocomplete="off" data-size="5" data-dropup-auto="false" ><option>Alege</option><option >1 Decembrie 1918</option><option >1 Mai</option><option >13 Septembrie</option><option >16 Februarie</option><option >23 August (Catelul)</option><option >Agronomie</option><option >Alba Iulia</option><option Alexandriei>Alexandriei</option><option Alexandru Obregia>Alexandru Obregia</option><option >Amzei</option><option >Andronache</option><option >Antiaeriana</option><option >Aparatorii Patriei</option><option >Apusului</option><option >Arcul de Triumf</option><option >Armeneasca</option><option >Aviatiei</option><option >Aviatorilor</option><option >Baba Novac</option><option >Baicului</option><option >Balta Alba</option><option >Baneasa</option><option >Banu Manta</option><option >Barbu Vacarescu</option><option >Basarab</option><option >Basarabia</option><option >Batistei</option><option >Bd. Gloriei</option><option >Bd. Laminorului</option><option >Beller</option><option >Berceni</option><option >Brancoveanu</option><option >Brezoianu</option><option >Bucur Obor</option><option >Bucurestii Noi</option><option >Calea Calarasilor</option><option >Calea Plevnei</option><option >Calea Victoriei</option><option >Camil Ressu</option><option >Campia Libertatii</option><option >Candiano Popescu</option><option >Cantemir</option><option >Capitale</option><option >Casin</option><option >Centrul Civic</option><option >Centrul Istoric</option><option >Centura Est</option><option >Centura Nord</option><option >Centura Sud</option><option >Centura Vest</option><option >Chibrit</option><option >Chirigii</option><option >Chisinau</option><option >Chitila</option><option >Cismigiu</option><option >Clabucet</option><option >Clucerului</option><option >Colentina</option><option >Compozitorilor</option><option >Constructorilor</option><option >Cosbuc</option><option >Costin Georgian</option><option >Cotroceni</option><option >Crangasi</option><option >Crevedia</option><option >Cutitul de Argint</option><option >Dacia</option><option >Damaroaia</option><option >Decebal</option><option >DN </option><option >DN </option><option >Doamna Ghica</option><option >Domenii</option><option >Dorobanti</option><option >Dristor</option><option >Drumul Gazarului</option><option >Drumul Sarii</option><option >Drumul Taberei</option><option >Dudesti</option><option >Eminescu</option><option >Eroii Revolutiei</option><option >Ferdinand</option><option >Ferentari</option><option >Fizicienilor</option><option >Floreasca</option><option >Foisorul de Foc</option><option >Fundeni</option><option >Gara de Est</option><option >Gara de Nord</option><option >Ghencea</option><option >Giulesti</option><option >Giulesti Sarbi</option><option >Giurgiului</option><option >Gorjului</option><option >Gradina Icoanei</option><option >Grivita</option><option >Grozavesti</option><option >Herastrau</option><option >I.C. Bratianu</option><option >Iancu Nicolae</option><option >Iancului</option><option >Industriilor</option><option >Ion Creanga</option><option >Jiului</option><option >Kiseleff</option><option >Kogalniceanu</option><option >Lacul Morii</option><option >Lacul Tei</option><option >Lahovari</option><option >Libertatii</option><option >Lipscani</option><option >Liviu Rebreanu</option><option >Lizeanu</option><option >Lucretiu Patrascanu</option><option >Lujerului</option><option >Macaralei</option><option >Magheru</option><option >Magurele</option><option >Marasesti</option><option >Margeanului</option><option >Matei Voievod</option><option >Metalurgiei</option><option >Mihai Bravu</option><option >Militari</option><option >Mitropolie</option><option >Moinesti</option><option >Morarilor</option><option >Mosilor</option><option >Muncii</option><option >Natiunile Unite</option><option >Nerva Traian</option><option >Nicolae Grigorescu</option><option >Nordului</option><option >Obor</option><option >Octavian Goga</option><option >Oltenitei</option><option >Ozana</option><option >P-ta Alba Iulia</option><option >P-ta Amzei</option><option >P-ta Arsenalului</option><option >P-ta de Gros</option><option >P-ta Dorobanti</option><option >P-ta Galati</option><option >P-ta Gorjului</option><option >P-ta Jose Rizal</option><option >P-ta Leul</option><option >P-ta Muncii</option><option >P-ta Operei</option><option >P-ta Presei Libere</option><option >P-ta Resita</option><option >P-ta Romana</option><option >P-ta Rosetti</option><option >P-ta Sfanta Vineri</option><option >P-ta Sfantul Gheorghe</option><option >P-ta Sfantul Stefan</option><option >P-ta Sfintii Voievozi</option><option >P-ta Unirii</option><option >P-ta Universitatii</option><option >P-ta Victoriei</option><option >Pache Protopopescu</option><option >Pacii</option><option >Pajura</option><option >Panduri</option><option >Pantelimon</option><option >Parcul Carol</option><option >Parcul Circului</option><option >Petricani</option><option >Pieptanari</option><option >Pipera</option><option >Plevnei</option><option >Politehnica</option><option >Polona</option><option >Prelungirea Ferentari</option><option >Prelungirea Ghencea</option><option >Primaverii</option><option >Progresul</option><option >Rahova</option><option >Regie</option><option >Regina Elisabeta</option><option >Romana</option><option >Rosetti</option><option >Sala Palatului</option><option >Salaj</option><option >Salajan</option><option >Sebastian</option><option >Serban Voda</option><option >Sisesti</option><option >Socului</option><option >Soseaua Nordului</option><option >Splaiul Independentei</option><option >Splaiul Unirii</option><option >Stefan cel Mare</option><option >Stirbei Voda</option><option >Straulesti</option><option >Sura Mare</option><option >Take Ionescu</option><option >Tei</option><option >Teiul Doamnei</option><option >Televiziune</option><option >Theodor Pallady</option><option >Timisoara</option><option >Timpuri Noi</option><option >Tineretului</option><option >Titan</option><option >Titulescu</option><option >Trafic Greu</option><option >Tudor Vladimirescu</option><option >Turda</option><option >Unirii</option><option >Universitate</option><option >Uverturii</option><option >Vacaresti</option><option >Valea Ialomitei</option><option >Valea Oltului</option><option >Vasile Parvan</option><option >Vatra Luminoasa</option><option >Veteranilor</option><option >Victoriei</option><option >Viilor</option><option >Virtutii</option><option >Vitan</option><option >Vitan Mall</option><option >Vitan-Barzesti</option><option >Vitanul Nou</option><option >Zetarilor</option><option >Central</option><option >Est</option><option >Exterior Est</option><option >Exterior Nord</option><option >Exterior Sud</option><option >Exterior Vest</option><option >Nord</option><option >Nord-Est</option><option >Nord-Vest</option><option >Periferie</option><option >Sud</option><option >Sud-Est</option><option >Sud-Vest</option><option >Ultracentral</option><option >Vest</option></select>
+</select>
     </div>
   </div> 
 </div>

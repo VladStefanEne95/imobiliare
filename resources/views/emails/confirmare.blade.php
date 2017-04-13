@@ -552,7 +552,7 @@
                         
                             <h1>Salut {{ $name }},</h1>
 
-<p style="text-align:center !important;">Continua publicarea anuntului dand click pe butonul de mai jos.</p>
+<p style="text-align:center !important;">Anuntul a fost publicat cu succes.</p>
 
                         </td>
                     </tr>
@@ -689,15 +689,7 @@
     <tbody class="mcnButtonBlockOuter">
         <tr>
             <td style="padding-top:0; padding-right:18px; padding-bottom:18px; padding-left:18px;" valign="top" align="center" class="mcnButtonBlockInner">
-                <table border="0" cellpadding="0" cellspacing="0" class="mcnButtonContentContainer" style="border-collapse: separate !important;border-radius: 3px;background-color: #00ADD8;">
-                    <tbody>
-                        <tr>
-                            <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Helvetica; font-size: 18px; padding: 18px;">
-                                <a class="mcnButton " title="Publica anuntul" href="http://127.0.0.1:8000/plata/{{$id}}" target="_self" style="font-weight: bold;letter-spacing: -0.5px;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;">Publica anuntul</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+              
             </td>
         </tr>
     </tbody>
@@ -735,34 +727,16 @@
                     <td class="mcnCaptionRightImageContent" valign="top">
                     
                         
-                        <a href="https://img3.imonet.ro/XV0A/V0A00H47NTS/prezentare_155x110.jpg" title="" class="" target="_blank">
+                       
                         
 
-                        <img alt="" src="https://gallery.mailchimp.com/b3620a8e21237989c93f2efa8/images/f7dd0aa6-099f-430a-839c-f8598411243a.jpg" width="155" style="max-width:155px;" class="mcnImage">
+                        
                         </a>
 
                     
                     </td>
                 </tr>
             </tbody></table>
-            <table class="mcnCaptionRightTextContentContainer" align="right" border="0" cellpadding="0" cellspacing="0" width="264">
-                <tbody><tr>
-                    <td valign="top" class="mcnTextContent">
-                        <h3> Titlu {{ $titlu }}</h3>
-
-<p>Numar camere {{ $nr_camere }}<br>
-Pret {{ $pret }}<br>
-Zona<br>
-Oras</p>
-
-                    </td>
-                </tr>
-            </tbody></table>
-        </td>
-    </tr>
-</tbody></table>
-
-
 
 
             </td>

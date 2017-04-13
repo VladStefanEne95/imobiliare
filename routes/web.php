@@ -24,6 +24,16 @@ Route::get('/anunt/{anunt}', function ($anunt) {
 
 Route::get('/adauga-anunt', 'AccessController@display');
 
+Route::get('/superadmin-edit', 'AdminController@display');
+Route::post('/utilizator-adaugat', 'AdminController@addUser');
+Route::post('/utilizator-sters', 'AdminController@delUser');
+Route::post('/listeaza-utilizatorii', 'AdminController@listUsers');
+Route::post('/modifica-utilizator', 'AdminController@modUsers');
+
+Route::get('/admin-edit', 'AdminController@show');
+Route::post('/anunt-sters', 'AdminController@delAn');
+Route::post('/anunt-modificat', 'AdminController@modAn');
+
 Route::post('/anunt-adaugat', 'AddAnounceController@display');
 
 Route::get('/price/filter', 'FilterControler@display');
@@ -38,7 +48,8 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/plata/{id}', 'PaymentController@display');
 Route::get('/vp/{id}', 'PaymentController@check');
-Route::get('/edit/{id}', 'EditAnounceController@editAnounce');
+Route::get('/edit/{id}', 'EditAnounceController@addFields');
+Route::post('/anunt-editat/{id}', 'EditAnounceController@editFields');
 
 Auth::routes();
 
@@ -50,6 +61,13 @@ Route::get('/home', 'HomeController@index');
 
 
 Route::get('sendemail',  'MailController@html_email');
+
+Route::post('/upload', 'AddAnounceController@upload');
+
+// Route::get('upload', function() {
+//   return View::make('pages.upload');
+// });
+//Route::post('apply/upload', 'ApplyController@upload');
 
     
 

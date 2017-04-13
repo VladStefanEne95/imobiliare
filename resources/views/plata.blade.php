@@ -93,19 +93,41 @@ td,th {
   <h3 style="padding-top:40px;">Alege optiunile de promovare:</h3>
 
 
-   <div style="position:relative;left:60px;">
+    <form action="http://127.0.0.1:8000/vp/{{$date->id}}" style="text-align: center;">
     <table style="border-spacing:30px;border-collapse: separate;border:none; ">
       <tr>
-        <td onClick="document.location.href='http://127.0.0.1:8000/vp/{{$date->id}}';" bgcolor="#ffff99" style="font-size:30px;"><font color="gold">Promovare Gold<br>blablalbl</font></td>
-        <td onClick="document.location.href='http://127.0.0.1:8000/vp/{{$date->id}}';"  bgcolor="#d9d9d9" style="font-size:30px;"><font color="silver">Promovare Silver<br>blablabla</font></td>
+        <td  bgcolor="#ffff99" style="font-size:30px;"><font color="gold">Promovare Gold<br>
+        vizibil pentru 97% dintre cumparatorii interesati<br> Numar de contacte maxim garantat<br>Promovare maxima garantata<br>
+        <select>
+          <option>3 zile - 20 euro</option>
+          <option>15 zile - 50 euro</option>
+          <option>30 zile - 80 euro</option>
+        </select><br>
+         <input type="radio" name="option" value="gold"> <br>
+       
+
+        </font></td>
+        <td   bgcolor="#d9d9d9" style="font-size:30px;"><font color="silver">Promovare Silver<br>
+        Vizibil pentru 67% dintre cumparatorii interesati<br> Numar ridicat de contacte<br>Promovare suplimentara inclusa<br>
+          <select>
+          <option>7 zile - 10 euro</option>
+          <option>30 zile - 20 euro</option>
+          <option>90 zile - 40 euro</option>
+        </select><br>
+        <input type="radio" name="option" value="silver"><br>
+        </font></td>
       </tr>
-
-        
-
       </table>
+      <h3>Metode de plata</h3>
+      <div>
+        <input type="radio" name="tip" value="gold">Card
+        <input type="radio" name="tip" value="gold">Card din cont
+        <input type="radio" name="tip" value="gold">Ordin de plata
+      </div><br>
+      <input type="submit" class="btn btn-success"  value="Plateste">
+      </form><br>
   </div>
 
 
-</div>
 
 </body>

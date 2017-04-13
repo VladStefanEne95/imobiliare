@@ -73,12 +73,9 @@ td,th {
 
 
 <div class="container">
-  <div class =" alert alert-success"> 
-  <h2>Anunţul tău a fost adaugat cu succes</h2>
+  <div class =" alert alert-info"> 
+  <h2>Pentru a continua publicarea anuntului  confirma-ti emailul!</h2>
   </div>
-  <div>
-  <h2 ><a href="http://127.0.0.1:8000/">Intoarce-te la pagina principala </a></h2>
-  <h2><a href="http://127.0.0.1:8000/edit/{{$id}}">Adauga mai multe optiuni: </a></h2>
 
 
   </div>

@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Bucharest',
 
     /*
     |--------------------------------------------------------------------------
@@ -163,7 +163,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         'Collective\Html\HtmlServiceProvider',
-		
+         Intervention\Image\ImageServiceProvider::class,
+         Collective\Html\HtmlServiceProvider::class,		
 
         /*
          * Package Service Providers...
@@ -233,11 +234,12 @@ crocodicstudio\crudbooster\CRUDBoosterServiceProvider::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 		'PDF' => Barryvdh\DomPDF\Facade::class,
-'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-'Image' => Intervention\Image\Facades\Image::class,
-'CRUDBooster' => crocodicstudio\crudbooster\helpers\CRUDBooster::class,
- 'Form' => 'Collective\Html\FormFacade',
-  'Html' => 'Collective\Html\HtmlFacade',
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'CRUDBooster' => crocodicstudio\crudbooster\helpers\CRUDBooster::class,
+        'Form'      => Collective\Html\FormFacade::class,
+        'HTML'      => Collective\Html\HtmlFacade::class,
+        'Image'     => Intervention\Image\Facades\Image::class
 
     ],
 
