@@ -68,20 +68,24 @@
         </div>
     </div>
 </nav>
-<div style="padding-left: 2cm;padding-top: 1cm">
+<div class="container" style="padding-left: 2cm;padding-top: 1cm">
     <table>
         <tr>
             <td>
                 <div style="position: fixed">
 <?php echo $anunt->pret ,"euro <br>";
-    echo "anunt->adresa <br>";
+    echo $anunt->adresa, "<br>";
 ?>
                 </div>
-<img src="https://img3.imonet.ro/X8SP/8SP00H2IF84/apartament-de-vanzare-2-camere-bucuresti-aparatorii-patriei-74465148_277x208.jpg"
-alt="Apartament" style="width:304px;height:248px;"><br>
+<?php  $first = current(explode("|", $anunt->imagini)); 
+                       echo  "<img src='http://127.0.0.1:8000$first'
+                             alt='Apartament' style='width:304px;height:228px;'><br>"?><br>
             </td>
             <td style ="padding-left:2cm; ">
-                <p>Detalii despre cel ce a publicat anuntul<p>
+                <p><?php echo $anunt->nume ?><p>
+                <p><?php echo $anunt->oras ?><p>
+                <p><?php echo $anunt->zona ?><p>
+                <p><?php echo $anunt->telefon ?><p>
             </td>
         </tr>
     </table>
@@ -106,6 +110,7 @@ alt="Apartament" style="width:154px;height:128px;">
     </tr>
 </table>
     <p>Detalii text despre apartament</p>
+    <p><?php echo $anunt->descriere ?><p>
     <p>Caracteristici</p>
     <table>
         <tr>

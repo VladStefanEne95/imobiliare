@@ -30,7 +30,7 @@
     </style>
 
     <?php
-        $filter_counter= 0;
+        $filter_counter = 0;
 
     function parseC($link){
         $aux_first = strpos($link,'c');
@@ -112,8 +112,6 @@
             $room1 = substr ($aux2, 1, $aux_second - $aux_first - 1);
             $room2 = substr ($aux2 ,$aux_second - $aux_first + 1 );
 
-
-
             return ($room1."-".$room2."euro");
 
         }
@@ -150,7 +148,7 @@
                         <li><a href="#">Page 1-3</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Cauta</a></li>
+                <li><a href="http://127.0.0.1:8000/price/filter">Cauta</a></li>
                 <li><a href="http://127.0.0.1:8000/adauga-anunt">Adauga anunt</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -317,13 +315,9 @@
                                 </li>
                             </ul>
                         </div>
-
-
                 </td>
-
             </tr>
         </table>
-
     </section>
 
     <section class ="content-section">
@@ -340,13 +334,19 @@
                 <td>
                     <table class="primul">
                         <tr>
-                            <?php echo" <td>$user->titlu</td>"; ?>
+                        
+                            <?php  $first = current(explode("|", $user->imagini));
+                           
+                            echo" <td>$user->titlu</td>
+                           
+
                         </tr>
 
                         <tr>
-                            <td><img src="https://img3.imonet.ro/X8SP/8SP00H2IF84/apartament-de-vanzare-2-camere-bucuresti-aparatorii-patriei-74465148_277x208.jpg"
-                                     alt="Apartament" style="width:154px;height:128px;"><br></td>
-                        </tr>
+                            <td><img src='http://127.0.0.1:8000$first'
+                                     alt='Apartament' style='width:154px;height:128px;'><br></td>
+                        </tr>"
+                        ?>
                         <?php
                         echo "<tr>";
                         echo "<td>numar camere:  ", $user->nr_camere , "<td>";
@@ -360,6 +360,7 @@
                 }
                 ?>
             </tr></table>
+
         <table class="second">
 
             <?php
@@ -367,12 +368,13 @@
             $j = 1;
             $nr_tel =array();
             foreach ($users as $user){
-            $nr_tel[$j] = $user->telefon;
+            $nr_tel[$user->id] = $user->telefon;
             $j++; ?>
             <tr>
                 <td ><div class="col-md-3">
-                        <img src="https://img3.imonet.ro/X8SP/8SP00H2IF84/apartament-de-vanzare-2-camere-bucuresti-aparatorii-patriei-74465148_277x208.jpg"
-                             alt="Apartament" style="width:304px;height:228px;"><br>
+                <?php  $first = current(explode("|", $user->imagini)); 
+                       echo  "<img src='http://127.0.0.1:8000$first'
+                             alt='Apartament' style='width:304px;height:228px;'><br>"?>
                     </div>
                 </td>
 
@@ -384,8 +386,12 @@
                             <?php
                             echo "<button type='button' class='btn btn-primary btn-sm'>$user->nr_camere camere</button>";
                             echo "<button type='button' class='btn btn-primary btn-sm'>$user->suprafata_utila  MP</button>";
-                            echo "<button type='button' class='btn btn-primary btn-sm'>Etaje $user->etaje/$user->regim_inaltime  </button>";
-                            echo "<button type='button' class='btn btn-primary btn-sm'>Bloc $user->tip_bloc </button>";
+                            if(isset($user->regim_inaltime))
+                                echo "<button type='button' class='btn btn-primary btn-sm'>Etaje $user->etaje/$user->regim_inaltime  </button>";
+                            else
+                                echo "<button type='button' class='btn btn-primary btn-sm'>Etaje $user->etaje </button>";
+                            if(isset($user->tip_bloc))
+                             echo "<button type='button' class='btn btn-primary btn-sm'>Bloc $user->tip_bloc </button>";
                             ?>
                         </div><br><br>
 
@@ -398,7 +404,7 @@
                         <div class="div2 col-md-">
                             <br>
                             <?php
-                            $link_apartament = "http://127.0.0.1:8000/anunt/".$user->titlu;
+                            $link_apartament = "http://127.0.0.1:8000/anunt/".$user->id;
                             echo '<a href="' . $link_apartament . '"class="btn btn-success">Detalii</a>';
                             $nr_tel_id ='test'.$user->id;
                             echo "<button id=$nr_tel_id type='button' class='btn btn-info telefon'>Numar telefon</button>";
@@ -437,7 +443,7 @@
                 $(".telefon").click(function(){
                     var arrayFromPHP = <?php echo json_encode($nr_tel); ?>;
                     var nr_telefon;
-                    var id_telefon =(event.target.id);
+                    var id_telefon = (event.target.id);
                     id_telefon = "#".concat(id_telefon);
                     index = id_telefon.replace(/\D/g,'');
                     $(id_telefon).replaceWith(arrayFromPHP[index]);

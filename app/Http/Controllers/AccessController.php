@@ -11,8 +11,6 @@ class AccessController extends Controller
       if(\Auth::check())
         return view('adauga-anunt');
       else 
-        //return view('not-logged');
-        return view ('adauga-anunt');
-      
+        return view('not-logged');
     }
 }

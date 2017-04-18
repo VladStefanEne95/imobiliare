@@ -127,12 +127,7 @@
 
 
 
-<div class="container">
-<form action="upload.php" method="get" enctype="multipart/form-data">
-    Adauga poze:
-    <input type="file" name="fileToUpload" id="fileToUpload">
-</form>
-</div>
+
 
 
 

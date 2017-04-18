@@ -103,11 +103,11 @@ td,th {
           <option>15 zile - 50 euro</option>
           <option>30 zile - 80 euro</option>
         </select><br>
-         <input type="radio" name="option" value="gold"> <br>
+         <input type="radio" name="option" value="gold" checked=""> <br>
        
 
         </font></td>
-        <td   bgcolor="#d9d9d9" style="font-size:30px;"><font color="silver">Promovare Silver<br>
+        <td  bgcolor="#d9d9d9" style="font-size:30px;"><font color="silver">Promovare Silver<br>
         Vizibil pentru 67% dintre cumparatorii interesati<br> Numar ridicat de contacte<br>Promovare suplimentara inclusa<br>
           <select>
           <option>7 zile - 10 euro</option>

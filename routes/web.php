@@ -15,9 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/anunt/{anunt}', function ($anunt) {
-    $date = \DB::table('anunturi')->get()->where('titlu','vanzare-apartament')->first();
-
-    return view('anunt',['anunt'=>$date[0]]);
+    $date = \DB::table('anunturi')->get()->where('id',$anunt)->first();
+    return view('anunt',['anunt'=>$date]);
 });
 
 

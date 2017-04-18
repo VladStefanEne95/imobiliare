@@ -752,8 +752,8 @@
 
 <p>Numar camere {{ $nr_camere }}<br>
 Pret {{ $pret }}<br>
-Zona<br>
-Oras</p>
+Zona {{ $zona }}<br>
+Oras {{ $oras }}</p>
 
                     </td>
                 </tr>

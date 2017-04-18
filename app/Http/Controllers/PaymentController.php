@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-   public function html_email($email){
+   public function html_email($nume, $email){
      $data = array(
-        'name' => 'name'
+        'name' => $nume
        
     );
 
@@ -33,10 +33,11 @@ class PaymentController extends Controller
     {
       //verificare plata
       //daca e  ok , updatez statusul
+      \DB::table('anunturi')->where('id', $id)->update(['status' => '1']);
       $email = \DB::table('anunturi')->where('id', $id)->value('email');
-     
+      $nume = \DB::table('anunturi')->where('id', $id)->value('nume');
       
-      $this->html_email( $email);
+      $this->html_email($nume, $email);
       return view ('anunt-succes', ['id' => $id]);
     }
 }

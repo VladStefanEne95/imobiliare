@@ -8,21 +8,21 @@ class AdminController extends Controller
 {
   public function addUser(Request $request)
   {
-    // \DB::table('users')->insert(
-    //    ['name' => $request->nume,
-    //    'email' => $request->email,
-    //    'password' => $request->password1, 
-    //    'created_at' => new \DateTime(),
-    //    'updated_at' => new \DateTime()
-    //    ]); 
+     \DB::table('users')->insert(
+        ['name' => $request->nume,
+        'email' => $request->email,
+        'password' => $request->password1, 
+        'created_at' => new \DateTime(),
+        'updated_at' => new \DateTime()
+        ]); 
  return view('admin');
   } 
   public function delUser(Request $request)
   {
-    // if (isset($request->nume)) 
-    //  \DB::table('users')->where('name', '=', $request->nume)->delete();
-    // else if (isset($request->email)) 
-    //  \DB::table('users')->where('email', '=', $request->email)->delete();
+     if (isset($request->nume)) 
+      \DB::table('users')->where('name', '=', $request->nume)->delete();
+     else if (isset($request->email)) 
+      \DB::table('users')->where('email', '=', $request->email)->delete();
   
       return view('admin');
   }
@@ -38,9 +38,9 @@ class AdminController extends Controller
    public function modUsers(Request $request)
   {
      if (isset($request->email)) 
-      \DB::table('users')->where('name', '=', $request->nume)->update(['email' => $request->email]);;
+      \DB::table('users')->where('name', '=', $request->nume)->update(['email' => $request->email]);
      if (isset($request->password)) 
-      \DB::table('users')->where('name', '=', $request->nume)->update(['password' => $request->password]);;
+      \DB::table('users')->where('name', '=', $request->nume)->update(['password' => $request->password]);
   
       return view('admin');
   }
@@ -61,7 +61,8 @@ class AdminController extends Controller
 
     public function display()
     {
-      return view('admin');
+      if (\Auth::user()->name == 'stefan')
+        return view('admin');
     }
       public function show()
     {
