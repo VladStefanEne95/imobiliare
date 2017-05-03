@@ -7,12 +7,7 @@ use Illuminate\Http\Request;
 class EditAnounceController extends Controller
 {
   public function editFields($id, Request $request)
-  {
-
-     // $result = array();
-     //    if ( isset ($request->structuraRezistenta))
-     //        array_push($result, ['structura_de_rezistenta','=', $request->structuraRezistenta]);
-       
+  {    
      if (isset($request->structuraRezistenta) ) 
       \DB::table('anunturi')->where('id', '=', $id)->update(['structura_de_rezistenta' => $request->structuraRezistenta]);
 
@@ -44,6 +39,10 @@ class EditAnounceController extends Controller
   }
     public function addFields($id)
     {
-       return view ('edit-anounce-apartament',['date'=>$id]);
+      $aux1 = \DB::table('anunturi')->where('id',$id)->value('user_id');
+
+
+       if (\Auth::user()->id == $aux1)
+        return view ('edit-anounce-apartament',['date'=>$id]);
     }
 }

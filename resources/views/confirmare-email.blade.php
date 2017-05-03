@@ -37,6 +37,7 @@ td,th {
   border:none
 }
     </style>
+    <title>Confirmare anunt</title>
 </head>
 <body>
  <nav class="navbar navbar-inverse">
@@ -74,7 +75,7 @@ td,th {
 
 <div class="container">
   <div class =" alert alert-info"> 
-  <h2>Pentru a continua publicarea anuntului  confirma-ti emailul!</h2>
+  <h2>Pentru a continua publicarea anuntului  verifica-ti emailul!</h2>
   </div>
 
 

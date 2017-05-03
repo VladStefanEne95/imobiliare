@@ -329,7 +329,10 @@
                 foreach ($users as $user){
                 if($i>2)
                     break;
-                $i++;
+                if($user->status == 0)
+                    continue;
+                else
+                    $i++;
                 ?>
                 <td>
                     <table class="primul">
@@ -368,8 +371,10 @@
             $j = 1;
             $nr_tel =array();
             foreach ($users as $user){
-            $nr_tel[$user->id] = $user->telefon;
-            $j++; ?>
+                if($user->status == 0)
+                    continue;
+                $nr_tel[$user->id] = $user->telefon;
+                $j++; ?>
             <tr>
                 <td ><div class="col-md-3">
                 <?php  $first = current(explode("|", $user->imagini)); 

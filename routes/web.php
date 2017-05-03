@@ -63,10 +63,7 @@ Route::get('sendemail',  'MailController@html_email');
 
 Route::post('/upload', 'AddAnounceController@upload');
 
-// Route::get('upload', function() {
-//   return View::make('pages.upload');
-// });
-//Route::post('apply/upload', 'ApplyController@upload');
+
 
     
 

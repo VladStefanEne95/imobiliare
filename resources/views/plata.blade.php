@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <title>Plata</title>
 
     <style>
       .container {
@@ -36,6 +36,17 @@ table {
 td,th {
   border:none
 }
+
+.buton-text{
+  font-size:18px;
+}
+.pret-text{
+  font-size:30px;
+}
+.card {
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
     </style>
 </head>
 <body>
@@ -73,56 +84,60 @@ td,th {
 
 
 <div class="container"> 
-  <h3>Anunţul tău</h3>
-  <div style="position:relative;left:60px;">
+  <h3 align="center">Anunţul tău</h3>
+  <div style="position:relative;left:120px; text-align:center">
     <table>
       <tr valign="top">
-        <td>
-          <img src="https://img2.imonet.ro/XV0A/V0A00H47NTS/apartament-de-vanzare-2-camere-bucuresti-bucurestii-noi-75997504_210x158.jpg">
-        </td>
-        <td style="padding-left:10px;width:300px;">
-          <h3>{{$date->titlu}}<br><small>{{$date->zona}}</small></h3>
-          <button type="button" class="btn btn-default">{{$date->nr_camere}} camere</button>
-          <button type="button" class="btn btn-default">{{$date->suprafata_utila}} mp</button>
-          <button type="button" class="btn btn-default">Etaj {{$date->etaje}}</button>
-          <h3><small>{{$date->pret}} euro</small></h3>
+        <td style="padding-left:10px;width:600px;">
+          <h2>{{$date->titlu}}<br><small>{{$date->oras}} {{$date->zona}}</small></h2>
+          <button type="button" class="btn btn-default buton-text">{{$date->nr_camere}} camere</button>
+          <button type="button" class="btn btn-default buton-text">{{$date->suprafata_utila}} mp</button>
+          <button type="button" class="btn btn-default buton-text">Etaj {{$date->etaje}}</button>
+          <h3 class="pret-text"><small>{{$date->pret}} euro</small></h3>
         </td>
       </tr>
       </table>
   </div>
-  <h3 style="padding-top:40px;">Alege optiunile de promovare:</h3>
 
-
+  <h3 style="padding-top:40px;">Alege opțiunile de promovare:</h3>
     <form action="http://127.0.0.1:8000/vp/{{$date->id}}" style="text-align: center;">
-    <table style="border-spacing:30px;border-collapse: separate;border:none; ">
+    <table  style="border-spacing:30px;border-collapse: separate;border:none; ">
       <tr>
-        <td  bgcolor="#ffff99" style="font-size:30px;"><font color="gold">Promovare Gold<br>
-        vizibil pentru 97% dintre cumparatorii interesati<br> Numar de contacte maxim garantat<br>Promovare maxima garantata<br>
+        <td class="card" bgcolor="#ffff99" style="font-size:30px;">Promovare Gold<br>
+        Vizibil pentru 97% dintre cumparătorii interesați.<br> Numar de contacte maxim garantat.<br>Promovare maximă garantată.<br>
         <select>
           <option>3 zile - 20 euro</option>
           <option>15 zile - 50 euro</option>
           <option>30 zile - 80 euro</option>
         </select><br>
-         <input type="radio" name="option" value="gold" checked=""> <br>
+        <div class="btn-secondary" >
+  <label class="btn btn-default">
+    <input   type="radio" name="options" id="optapt" value="apartament" > Gold
+  </label><br><br>
+  </div>
        
 
         </font></td>
-        <td  bgcolor="#d9d9d9" style="font-size:30px;"><font color="silver">Promovare Silver<br>
-        Vizibil pentru 67% dintre cumparatorii interesati<br> Numar ridicat de contacte<br>Promovare suplimentara inclusa<br>
+        <td class="card" bgcolor="#d9d9d9" style="font-size:30px;">Promovare Silver<br>
+        Vizibil pentru 67% dintre cumpăratorii interesați.<br> Număr ridicat de contacte<br>Promovare suplimentara inclusă<br>
           <select>
           <option>7 zile - 10 euro</option>
           <option>30 zile - 20 euro</option>
           <option>90 zile - 40 euro</option>
         </select><br>
-        <input type="radio" name="option" value="silver"><br>
+          <div class="btn-secondary" >
+  <label class="btn btn-default">
+    <input   type="radio" name="options" id="optapt" value="apartament" > Silver
+  </label>
+  </div>
         </font></td>
       </tr>
       </table>
-      <h3>Metode de plata</h3>
+      <h3>Metode de plată</h3>
       <div>
         <input type="radio" name="tip" value="gold">Card
         <input type="radio" name="tip" value="gold">Card din cont
-        <input type="radio" name="tip" value="gold">Ordin de plata
+        <input type="radio" name="tip" value="gold">Ordin de plată
       </div><br>
       <input type="submit" class="btn btn-success"  value="Plateste">
       </form><br>

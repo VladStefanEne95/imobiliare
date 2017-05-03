@@ -73,13 +73,57 @@ class AddAnounceController extends Controller
        ]); 
      
   }
+
+
    public function upload(Request $request){
+
+      $width = 500;
+      $height = 500;
       $uploadDir = 'uploads';
+
       if (!empty($_FILES)) {
         $tmpFile = $_FILES['file']['tmp_name'];
+        list($widthInit, $heightInit) = getimagesize($tmpFile);
         $filename = $uploadDir.'/'.time().'-'. $_FILES['file']['name'];
-        move_uploaded_file($tmpFile,$filename);
+
+        $raport = $widthInit/$heightInit;
+
+        if ($widthInit > $heightInit){
+          $minWidth = ($widthInit - $heightInit)/2;
+          $maxWidth = ($widthInit - $heightInit)/2 + $width;
+          $minHeight = 0;
+          $maxHeight = $heightInit;
+          //$widthInit = $heightInit;
+        }
+        else {
+          $minHeight = (- $widthInit + $heightInit)/2;
+          $maxHeight = (- $widthInit + $heightInit)/2 + $width;
+          $minWidth = 0;
+          $maxWidth = $widthInit;
+        }
+          
+
+          //$heightInit = $widthInit;
+
+        if($raport < 1)
+           $raport = $heightInit/$widthInit;
+
+        $widthFinal = ($widthInit - 500)/2;
+        $heightFinal = ($heightInit - 500)/2;
+
+
+        $dest_image = $filename;
+        $img = imagecreatetruecolor(500, 500);
+        $org_img = imagecreatefromjpeg($tmpFile);
+        $ims = getimagesize($tmpFile);
+        imagecopyresized($img, $org_img, 0, 0, $minWidth, $minHeight, 500, 500,$maxWidth,$maxHeight);
+        imagejpeg($img,$dest_image,90);
+
+
+       // move_uploaded_file($tmpFile,$filename);
+     
       }
+
       $success_message = array( 'success' => 200,
                         'filename' => $pubpath.$foldername.'/'.$filename,
                         );
@@ -114,6 +158,8 @@ class AddAnounceController extends Controller
         if(!is_numeric($request->suprafataUtila))
             $corect = false;
         if(strlen($request->telefon) != 10)
+          $corect = false;
+        if ( !(strpos ($request->email, "@") && strpos($request->email, ".") && strlen($request->email) > 4))
           $corect = false;
 
         if($request->options == 'apartament'){

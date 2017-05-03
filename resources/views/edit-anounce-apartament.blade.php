@@ -127,14 +127,7 @@
 
 
 
-
-
-
-
 <form method="post" action='/anunt-editat/{{Request::segment(2)}}'>
-
-
-
 
 
 <div class="container" style=" margin-left:240px;">
@@ -157,12 +150,6 @@
     <input  type="text" class="form-control" name="suprafata_construita" id="suprafata_construita" placeholder="Suprafata construita">
   </div> 
 </div>
-
-
-
-
-
-
 
 
 <div class = "container apartament">
@@ -239,14 +226,45 @@
 
 </form>
 
+<script>
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+$(document).ready(function() {
+  $('form').on('submit', function(e){
+    // validation code here
+    var suprafata = $('#suprafata_utila_totala').val();
+    if ( $('#suprafata_utila_totala').val()) {
+   if( !isNumeric(suprafata)){
+      window.alert("suprafata utila totala trebuie sa fie format doar din numere");
+      event.preventDefault();
+    }
+   }
+
+     var suprafata = $('#suprafata_construita').val();
+    if ( $('#suprafata_construita').val()) {
+   if( !isNumeric(suprafata)){
+      window.alert("suprafata construita totala trebuie sa fie format doar din numere");
+      event.preventDefault();
+    }
+   }
 
 
+    var an = $('#an_constructie').val();
+    if ( $('#an_constructie').val()) {
+   if( !isNumeric(an)){
+      window.alert("anul construirii trebuie sa fie format doar din numere");
+      event.preventDefault();
+    }
+   }
 
 
+  });
+});
 
 
-
-
+</script>
 
 <br><br><br><br><br>
 
