@@ -14,7 +14,7 @@ class AddTypeAndImages extends Migration
     public function up()
     {
          Schema::table('anunturi', function (Blueprint $table) {
-            $table->string("imagini");
+            $table->text("imagini");
             $table->string("tip");
             $table->string("tipContract");
         });

@@ -14,6 +14,10 @@ class AddAnounceController extends Controller
 {
 
    public function html_email($request, $id){
+
+    $first = current(explode("|", $request->imagini)); 
+    
+
      $data = array(
         'name' => $request->nume,
         'pret' => $request->pret,
@@ -21,7 +25,8 @@ class AddAnounceController extends Controller
         'titlu' => $request->titlu,
         'oras' => $request->oras,
         'zona' => $request->zona,
-        'id' => $id
+        'id' => $id,
+        'imagine' => "http://127.0.0.1:8000$first"
     );
 
     Mail::send('emails.welcome', $data, function ($message) use ($request){
@@ -85,15 +90,14 @@ class AddAnounceController extends Controller
         $tmpFile = $_FILES['file']['tmp_name'];
         list($widthInit, $heightInit) = getimagesize($tmpFile);
         $filename = $uploadDir.'/'.time().'-'. $_FILES['file']['name'];
+        $filename2 = $uploadDir.'/'.time().'1-'. $_FILES['file']['name'];
+         
 
-        $raport = $widthInit/$heightInit;
-
-        if ($widthInit > $heightInit){
+        if ($widthInit > $heightInit) {
           $minWidth = ($widthInit - $heightInit)/2;
           $maxWidth = ($widthInit - $heightInit)/2 + $width;
           $minHeight = 0;
           $maxHeight = $heightInit;
-          //$widthInit = $heightInit;
         }
         else {
           $minHeight = (- $widthInit + $heightInit)/2;
@@ -101,31 +105,29 @@ class AddAnounceController extends Controller
           $minWidth = 0;
           $maxWidth = $widthInit;
         }
-          
-
-          //$heightInit = $widthInit;
-
-        if($raport < 1)
-           $raport = $heightInit/$widthInit;
-
-        $widthFinal = ($widthInit - 500)/2;
-        $heightFinal = ($heightInit - 500)/2;
-
 
         $dest_image = $filename;
         $img = imagecreatetruecolor(500, 500);
-        $org_img = imagecreatefromjpeg($tmpFile);
+
+        $type = exif_imagetype($_FILES['file']['tmp_name']);
+        
+        if ($type == IMAGETYPE_JPEG)
+          $org_img = imagecreatefromjpeg($tmpFile);
+        else if ($type == IMAGETYPE_PNG)
+          $org_img = imagecreatefrompng($tmpFile);
+        else if ($type == IMAGETYPE_GIF)
+          $org_img = imagecreatefromgif($tmpFile);
+        
         $ims = getimagesize($tmpFile);
+
         imagecopyresized($img, $org_img, 0, 0, $minWidth, $minHeight, 500, 500,$maxWidth,$maxHeight);
         imagejpeg($img,$dest_image,90);
-
-
-       // move_uploaded_file($tmpFile,$filename);
-     
+        move_uploaded_file($tmpFile,$filename2);     
       }
 
       $success_message = array( 'success' => 200,
                         'filename' => $pubpath.$foldername.'/'.$filename,
+                        'filename2' => $pubpath.$foldername.'/'.$filename2,
                         );
      return json_encode($success_message);
 
@@ -213,7 +215,7 @@ class AddAnounceController extends Controller
     
  
     $this->html_email($request,\DB::getPdo()->lastInsertId());
-    //echo $request->email;
+    
     return view ('confirmare-email');
     //return view("not-logged");
   }

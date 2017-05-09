@@ -27,6 +27,8 @@
             padding-right:0.3cm;
         }
 
+
+
     </style>
 
     <?php
@@ -148,12 +150,12 @@
                         <li><a href="#">Page 1-3</a></li>
                     </ul>
                 </li>
-                <li><a href="http://127.0.0.1:8000/price/filter">Cauta</a></li>
-                <li><a href="http://127.0.0.1:8000/adauga-anunt">Adauga anunt</a></li>
+                <li><a href="{{\Request::url()}}">Cauta</a></li>
+                <li><a href="{{URL::to('/')}}/adauga-anunt">Adauga anunt</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="http://127.0.0.1:8000/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="http://127.0.0.1:8000/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="{{URL::to('/')}}/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="{{URL::to('/')}}/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         </div>
     </div>
@@ -175,26 +177,32 @@
                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><?php if (strpos($link,'c') > -1) echo return_camera($link); else echo "Numar camere";
                             ?>
                             <?php if (strpos($link,'c') === false)
-                             echo  "<span class='caret'></span></button>";
-                            ?>
-                        <a href="http://127.0.0.1:8000/price/filter?filtru=<?php echo parseC($link)?>">
-                            <?php
+                                echo  "<span class='caret'></span></button>";
+                             else 
+                                echo "<span class='close close1' aria-hidden='true'>&nbsp&times;</span>";
+                            
                             if (strpos($link,'c') > -1)
-                                echo "<button type='button' class='close' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+                                echo "<button type='button' class='close' aria-label='Close'></button>";
                             ?>
-                        </a>
+                    
+<script>
+$('.close1').click(function () {
+    window.location.replace("{{\Request::url()}}?filtru=<?php echo parseC($link)?>");
+    return false;
+});
 
+</script>
                         <ul class="dropdown-menu">
 
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php echo parseC($link)."c1"."c1";  ?>">garsoniera</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php echo parseC($link)."c2"."c2";  ?>">2 camere</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php echo parseC($link)."c3"."c3";  ?>">3 camere</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php echo parseC($link)."c4"."c4";  ?>">4 camere</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php echo parseC($link)."c5."."c5"; ?>">5 camere</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=<?php echo parseC($link)."c1"."c1";  ?>">garsoniera</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=<?php echo parseC($link)."c2"."c2";  ?>">2 camere</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=<?php echo parseC($link)."c3"."c3";  ?>">3 camere</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=<?php echo parseC($link)."c4"."c4";  ?>">4 camere</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=<?php echo parseC($link)."c5."."c5"; ?>">5 camere</a></li>
                             <form>
-                            <input type="text"  name="lowerRooms"  id="txt_input1" size="1" placeholder ="De la">
-                            <input type="text" name="higherRooms" id="txt_input2" size="1" placeholder ="la">
-                            <button id="btn_send" type="button" class="btn btn-default btn-sm submit">
+                            <input class="form-control" style="width:30%; float:left; margin-left:15px;" type="text"  name="lowerRooms"  id="txt_input1" size="1" placeholder ="De la">
+                            <input class="form-control" style="width:30%; float:left; margin-left:5px;" type="text" name="higherRooms" id="txt_input2" size="1" placeholder ="la">
+                            <button class="form-control" style="width:20%; float:left; margin-left:5px;" id="btn_send" type="button" class="btn btn-default btn-sm submit">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
                             </form>
@@ -206,27 +214,34 @@
 
                     <div class="dropdown">
                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><?php if (strpos($link,'p') > -1) echo return_pret($link); else echo "Pret vanzare"; ?>
-                            <span class="caret"></span></button>
-                        <a href="http://127.0.0.1:8000/price/filter?filtru=<?php echo parseP($link)?>">
-                            <?php
+                            <?php if (strpos($link,'p') === false)
+                                echo  "<span class='caret'></span></button>";
+                             else 
+                                echo "<span class='close close2' aria-hidden='true'>&times;</span>";
+                            
                             if (strpos($link,'p') > -1)
-                                echo "<button type='button' class='close' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+                                echo "<button type='button' class='close' aria-label='Close'></button>";
                             ?>
-                        </a>
+        <script>
+        $('.close2').click(function () {
+    window.location.replace("{{\Request::url()}}?filtru=<?php echo parseP($link)?>");
+    return false;
+});
+        </script>
                         <ul class="dropdown-menu">
 
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php echo parseP($link)."p0"."p20000";  ?>">max 20000</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php  echo parseP($link)."p20000"."p40000";  ?>">20000-40000</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php  echo parseP($link)."p40000"."p60000";  ?>">40000-60000</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php  echo parseP($link)."p60000"."p80000";  ?>">60000-80000</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php  echo parseP($link)."p80000"."p100000";  ?>">80000-100000</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php  echo parseP($link)."p100000"."p150000";  ?>">100000-150000</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php  echo parseP($link)."p150000"."p300000";  ?>">150000-300000</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=<?php  echo parseP($link)."300000"."600000";  ?>">300000-600000</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=<?php echo parseP($link)."p0"."p20000";  ?>">max 20000</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=<?php  echo parseP($link)."p20000"."p40000";  ?>">20000-40000</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=<?php  echo parseP($link)."p40000"."p60000";  ?>">40000-60000</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=<?php  echo parseP($link)."p60000"."p80000";  ?>">60000-80000</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=<?php  echo parseP($link)."p80000"."p100000";  ?>">80000-100000</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=<?php  echo parseP($link)."p100000"."p150000";  ?>">100000-150000</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=<?php  echo parseP($link)."p150000"."p300000";  ?>">150000-300000</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=<?php  echo parseP($link)."p300000"."p600000";  ?>">300000-600000</a></li>
                             <form>
-                                <input type="text"  name="lowerPrice"  id="txt_input3" size="1" placeholder ="De la">
-                                <input type="text" name="higherPrice" id="txt_input4" size="1" placeholder ="la">
-                                <button id="btn_send2" type="button" class="btn btn-default btn-sm submit">
+                                <input class="form-control" style="width:30%; float:left; margin-left:15px;"   type="text"  name="lowerPrice"  id="txt_input3" size="1" placeholder ="De la">
+                                <input class="form-control" style="width:30%; float:left;margin-left:5px;" type="text" name="higherPrice" id="txt_input4" size="1" placeholder ="la">
+                                <button class="form-control" style="width:20%; float:left;margin-left:5px;" id="btn_send2" type="button" class="btn btn-default btn-sm submit">
                                     <span class="glyphicon glyphicon-search"></span>
                                 </button>
                             </form>
@@ -241,14 +256,14 @@
                             <span class="caret"></span></button>
                         <ul class="dropdown-menu">
 
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=">Parter</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=">Etaj 1</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=">Etaj 3</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=">Etaj 3</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=">Etaj 4</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=">Demisol</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=">Mansarda</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=">Ultimele 2 etaje</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=">Parter</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=">Etaj 1</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=">Etaj 3</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=">Etaj 3</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=">Etaj 4</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=">Demisol</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=">Mansarda</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=">Ultimele 2 etaje</a></li>
                             <li>
                                 <input type="text" name="firstname" size="1" placeholder ="De la">
                                 <input type="text" name="firstname" size="1" placeholder ="la">
@@ -267,12 +282,12 @@
                             <span class="caret"></span></button>
                         <ul class="dropdown-menu">
 
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=">max 30 mp</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=">30 - 60 mp</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=">60 - 90 mp</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=">90 - 140 mp</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=">140 - 200 mp</a></li>
-                            <li><a href="http://127.0.0.1:8000/price/filter?filtru=">200 500 mp</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=">max 30 mp</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=">30 - 60 mp</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=">60 - 90 mp</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=">90 - 140 mp</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=">140 - 200 mp</a></li>
+                            <li><a href="{{\Request::url()}}?filtru=">200 500 mp</a></li>
                             <li>
                                 <input type="text" name="firstname" size="1" placeholder ="De la">
                                 <input type="text" name="firstname" size="1" placeholder ="la">
@@ -339,14 +354,13 @@
                         <tr>
                         
                             <?php  $first = current(explode("|", $user->imagini));
-                           
+                             $link = URL::to('/');
                             echo" <td>$user->titlu</td>
                            
-
                         </tr>
 
                         <tr>
-                            <td><img src='http://127.0.0.1:8000$first'
+                            <td><img src='$link$first'
                                      alt='Apartament' style='width:154px;height:128px;'><br></td>
                         </tr>"
                         ?>
@@ -378,7 +392,7 @@
             <tr>
                 <td ><div class="col-md-3">
                 <?php  $first = current(explode("|", $user->imagini)); 
-                       echo  "<img src='http://127.0.0.1:8000$first'
+                       echo  "<img src='$link$first'
                              alt='Apartament' style='width:304px;height:228px;'><br>"?>
                     </div>
                 </td>
@@ -409,7 +423,7 @@
                         <div class="div2 col-md-">
                             <br>
                             <?php
-                            $link_apartament = "http://127.0.0.1:8000/anunt/".$user->id;
+                            $link_apartament = URL::to('/')."/anunt/".$user->id;
                             echo '<a href="' . $link_apartament . '"class="btn btn-success">Detalii</a>';
                             $nr_tel_id ='test'.$user->id;
                             echo "<button id=$nr_tel_id type='button' class='btn btn-info telefon'>Numar telefon</button>";
@@ -431,14 +445,14 @@
         <script>
             $(document).ready(function () {
                 $("#btn_send").click(function () {
-                    window.location.replace("http://127.0.0.1:8000/price/filter?filtru=<?php echo parseC($link)."c"  ?>"+$("#txt_input1").val()+"c"+$("#txt_input2").val());
+                    window.location.replace("{{\Request::url()}}?filtru=<?php echo parseC($link)."c"  ?>"+$("#txt_input1").val()+"c"+$("#txt_input2").val());
                 });
             });
             </script>
         <script>
             $(document).ready(function () {
                 $("#btn_send2").click(function () {
-                    window.location.replace("http://127.0.0.1:8000/price/filter?filtru=<?php echo parseP($link)."p"  ?>"+$("#txt_input3").val()+"p"+$("#txt_input4").val());
+                    window.location.replace("{{\Request::url()}}?filtru=<?php echo parseP($link)."p"  ?>"+$("#txt_input3").val()+"p"+$("#txt_input4").val());
                 });
             });
         </script>

@@ -693,7 +693,7 @@
                     <tbody>
                         <tr>
                             <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Helvetica; font-size: 18px; padding: 18px;">
-                                <a class="mcnButton " title="Publica anuntul" href="http://127.0.0.1:8000/plata/{{$id}}" target="_self" style="font-weight: bold;letter-spacing: -0.5px;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;">Publica anuntul</a>
+                                <a class="mcnButton " title="Publica anuntul" href="{{URL::to('/')}}/plata/{{$id}}" target="_self" style="font-weight: bold;letter-spacing: -0.5px;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;">Publica anuntul</a>
                             </td>
                         </tr>
                     </tbody>
@@ -735,10 +735,10 @@
                     <td class="mcnCaptionRightImageContent" valign="top">
                     
                         
-                        <a href="https://img3.imonet.ro/XV0A/V0A00H47NTS/prezentare_155x110.jpg" title="" class="" target="_blank">
+                        <a href="{{ $imagine }}" title="" class="" target="_blank">
                         
 
-                        <img alt="" src="https://gallery.mailchimp.com/b3620a8e21237989c93f2efa8/images/f7dd0aa6-099f-430a-839c-f8598411243a.jpg" width="155" style="max-width:155px;" class="mcnImage">
+                        <img alt="Ola amigo" src="{{ $imagine }}" width="155" style="max-width:155px;" class="mcnImage">
                         </a>
 
                     
